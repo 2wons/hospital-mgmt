@@ -5,6 +5,7 @@
 #include "json.hpp"
 #include "Patient.h"
 #include "Record.h"
+#include "Db.hpp"
 
 int main()
 {
