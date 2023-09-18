@@ -5,20 +5,68 @@
 #include "json.hpp"
 #include "Patient.h"
 #include "Record.h"
-#include "Db.hpp"
+// #include "Db.hpp"
+#include "Console.h"
 
 int main()
 {
-    Db<Patient> pdb("patients.json");
-    pdb.load();
+    int choice = 0;
+    Console console;
 
-    std::vector<Patient> test = pdb.all();
-    for (auto v : test)
+    do
     {
-        std::cout << v.address << std::endl;
-    }
-    
-    string teste;
+        console.Clear();
 
-    std::cin >> teste;
+        console.displayMenu();
+
+        std::cout << "type---> ";
+        std::cin >> choice;
+
+        console.Clear();
+
+        switch (choice)
+        {
+        case 1:
+            console.patients();
+            break;
+
+        case 2:
+            console.doctors();
+            break;
+
+        case 3:
+            console.inventory();
+            break;
+
+        case 4:
+            console.medical();
+            break;
+        
+        case 5:
+            console.test("billing");
+            break;
+        
+        case 6:
+            console.test("schedule");
+            break;
+        
+        case 7:
+            console.test("message");
+            break;
+
+        default:
+            break;
+        }
+
+        if (choice != 999)
+        {
+            cout << "Press <enter> to continue > ";
+
+            cin.ignore();
+            cin.get();
+        }
+
+        console.Clear();
+
+    } while (choice != 999);
 }
