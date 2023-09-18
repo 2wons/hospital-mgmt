@@ -14,9 +14,6 @@ private:
 public:
 
     Record() {}
-
-    Record()
-        : id(0), patientID(), date(), diagnosis(), attendingPerson() {}
     
     void print();
     
