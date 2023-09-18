@@ -4,5 +4,5 @@
 
 void Patient::print()
 {
-    //std::cout << id << ": " << name << ", " << doctor << std::endl;
+    std::cout << id << ": " << lastName << ", " << dob << std::endl;
 }
