@@ -15,7 +15,12 @@ class Db
 {
 public:
 
-    Db(std::string jsondb) : file(jsondb) {}
+    Db() {}
+
+    Db(std::string jsondb) : file(jsondb) 
+    { 
+        load(); // if you want to disable file loading temporarily, comment this out
+    }
 
     void load()
     {
@@ -37,6 +42,10 @@ public:
         db.push_back(item); 
     }
 
+    /**
+    * @brief retrieves all records in list
+    * @return vector of records
+    */
     std::vector<T> all()
     {
         return db;
