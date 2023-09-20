@@ -42,6 +42,8 @@ public:
 
     void medical();
 
+    void onExit();
+
     /** Write string to console
      *  @param prompt string to display
      *  @param spaces no. of left spaces

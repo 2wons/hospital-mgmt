@@ -36,10 +36,19 @@ void Console::patients()
     int choice = 0;
     std::cin >> choice;
 
+    Clear();
+
     if (choice == 1)
     {
         WriteLine("choice1");
-        // add new patient
+        Patient patient;
+
+        WriteLine("Enter id: "       );
+        WriteLine("Enter lastName: " );
+        WriteLine("Enter firstName: ");
+        WriteLine("Enter address: "  );
+        WriteLine("Enter dob: "      );
+
     }
     else if (choice == 2)
     {
@@ -49,8 +58,6 @@ void Console::patients()
         for (auto& patient : results)
             patient.print();
     }
-    
-  
 }
 
 void Console::doctors()
@@ -95,6 +102,11 @@ void Console::Clear()
 #elif defined (__APPLE__)
     system("clear");
 #endif
+}
+
+void Console::onExit()
+{
+    patientsdb.save();
 }
 
 int Console::randomID(const int& idv)
