@@ -1,0 +1,52 @@
+[
+    {
+        "Name": "Biogesic",
+        "Quantity": 30,
+        "Price": 100
+    },
+    {
+        "Name": "Aspirin",
+        "Quantity": 50,
+        "Price": 75
+    },
+    {
+        "Name": "Ibuprofen",
+        "Quantity": 20,
+        "Price": 120
+    },
+    {
+        "Name": "Paracetamol",
+        "Quantity": 40,
+        "Price": 90
+    },
+    {
+        "Name": "Loratadine",
+        "Quantity": 25,
+        "Price": 60
+    },
+    {
+        "Name": "Amoxicillin",
+        "Quantity": 15,
+        "Price": 150
+    },
+    {
+        "Name": "Cetirizine",
+        "Quantity": 35,
+        "Price": 80
+    },
+    {
+        "Name": "Ranitidine",
+        "Quantity": 18,
+        "Price": 110
+    },
+    {
+        "Name": "Omeprazole",
+        "Quantity": 28,
+        "Price": 130
+    },
+    {
+        "Name": "Vitamin C",
+        "Quantity": 60,
+        "Price": 50
+    }
+]
