@@ -14,7 +14,7 @@
                 //"src/fort.o",
                 "-finput-charset=UTF-8",
                 "-o",
-                "${workspaceFolder}/build/${fileBasenameNoExtension}.exe",
+                "${workspaceFolder}/build/main.exe",
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
