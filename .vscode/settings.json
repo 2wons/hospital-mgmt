@@ -59,6 +59,10 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "valarray": "cpp",
-        "variant": "cpp"
-    }
+        "variant": "cpp",
+        "regex": "cpp",
+        "bitset": "cpp"
+    },
+    "cmake.configureOnOpen": false,
+    "cmake.generator": "Ninja"
 }

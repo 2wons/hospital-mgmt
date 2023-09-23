@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "dptname": "Internal Medicine"
+    },
+    {
+        "id": 2,
+        "dptname": "Surgery"
+    },
+    {
+        "id": 3,
+        "dptname": "Cardiology"
+    },
+    {
+        "id": 4,
+        "dptname": "Oncology"
+    },
+    {
+        "id": 5,
+        "dptname": "Neurology"
+    },
+    {
+        "id": 6,
+        "dptname": "Pediatrics"
+    },
+    {
+        "id": 7,
+        "dptname": "Obstetrics & Gynecology"
+    },
+    {
+        "id": 8,
+        "dptname": "Emergency Medicine"
+    },
+    {
+        "id": 9,
+        "dptname": "Radiology"
+    },
+    {
+        "id": 10,
+        "dptname": "Pathology"
+    }
+]

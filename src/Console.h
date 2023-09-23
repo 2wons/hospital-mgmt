@@ -1,13 +1,18 @@
 #pragma once
 
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <string>
 #include <vector>
 
+#include "tabulate.hpp"
+
 #include "Db.hpp"
-#include "Patient.h"
-#include "Record.h"
+#include "entity/Patient.h"
+#include "entity/Record.h"
+#include "entity/Department.h"
+#include "entity/Doctor.h"
+#include "entity/Item.h"
 
 using namespace std;
 
@@ -17,13 +22,13 @@ class Console
 {
 public:
 
-    Console() : patientsdb("patients.json") 
+    Console() : 
+        patientsdb("patients.json"),
+        departmentsdb("departments.json"),
+        recordsdb("records.json"),
+        doctorsdb("doctors.json"), 
+        inventorydb("inventory.json")
     {
-        //test data
-        /* Patient patient1(1, "John Doe", "Doe", "John", "1990-01-15", "123 Main St");
-        Patient patient2(2, "Jane Smith", "Smith", "Jane", "1985-05-20", "456 Elm St");
-        patientsdb.add(patient1);
-        patientsdb.add(patient2); */
 
     }
         
@@ -36,13 +41,33 @@ public:
 
     void patients();
 
+    void addPatient();
+
+    void viewPatients();
+
+    void findPatient();
+
     void doctors();
+
+    void addDoctor();
+
+    void viewDoctors();
 
     void inventory();
 
+    void addItem();
+
+    void viewItems();
+
     void medical();
 
+    void addRecord();
+
+    void viewDepartmentRecords();
+
     void onExit();
+
+    void pause();
 
     /** Write string to console
      *  @param prompt string to display
@@ -56,11 +81,8 @@ public:
 
 private:
     Db<Patient> patientsdb;
-
-    /** Generate a random 3 digit number
-     *  @author Programmer 2
-     *  @param idv 0 for video id, >0 for customer
-     *  @return (int) generated id number
-     */
-    int randomID(const int& idv);
+    Db<Record> recordsdb;
+    Db<Department> departmentsdb;
+    Db<Doctor> doctorsdb;
+    Db<Item> inventorydb;
 };
