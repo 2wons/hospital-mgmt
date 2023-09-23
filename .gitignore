@@ -1,2 +1,5 @@
-build/*.exe
+build/*
+!/build/*.json
+build/compile_commands.json
+cmake-build-debug/
 zdump/

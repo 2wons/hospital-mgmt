@@ -19,7 +19,7 @@ public:
 
     Db(std::string jsondb) : file(jsondb) 
     { 
-        load(); // if you want to disable file loading temporarily, comment this out
+        load();
     }
 
     void load()
@@ -46,14 +46,14 @@ public:
     * @brief retrieves all records in list
     * @return vector of records
     */
-    std::vector<T> all()
+    std::vector<T>& all()
     {
         return db;
     }
 
-    T find() 
+    typename std::vector<T>::iterator find(const int& id) 
     {
-        //implement
+        return std::find(db.begin(), db.end(), id);
     }
 
     T remove() 

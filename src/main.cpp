@@ -3,9 +3,6 @@
 #include <fstream>
 
 #include "json.hpp"
-#include "Patient.h"
-#include "Record.h"
-// #include "Db.hpp"
 #include "Console.h"
 
 int main()
@@ -19,7 +16,7 @@ int main()
 
         console.displayMenu();
 
-        std::cout << "type---> ";
+        std::cout << "type input---> ";
         std::cin >> choice;
 
         console.Clear();
@@ -69,4 +66,6 @@ int main()
         console.Clear();
 
     } while (choice != 999);
+
+    //console.onExit();
 }

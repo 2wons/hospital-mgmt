@@ -3,70 +3,60 @@
         "id": 1,
         "lastName": "Smith",
         "firstName": "John",
-        "contact_no": "123-456-7890",
-        "department": "Cardiology"
+        "departmentid": 1
     },
     {
         "id": 2,
         "lastName": "Johnson",
         "firstName": "Alice",
-        "contact_no": "987-654-3210",
-        "department": "Dermatology"
+        "departmentid": 2
     },
     {
         "id": 3,
         "lastName": "Brown",
         "firstName": "Michael",
-        "contact_no": "555-123-4567",
-        "department": "Orthopedics"
+        "departmentid": 3
     },
     {
         "id": 4,
         "lastName": "Davis",
         "firstName": "Sarah",
-        "contact_no": "333-888-9999",
-        "department": "Pediatrics"
+        "departmentid": 4
     },
     {
         "id": 5,
         "lastName": "Wilson",
         "firstName": "David",
-        "contact_no": "555-555-5555",
-        "department": "Ophthalmology"
+        "departmentid": 5
     },
     {
         "id": 6,
         "lastName": "Anderson",
         "firstName": "Linda",
-        "contact_no": "777-222-1111",
-        "department": "Obstetrics"
+        "departmentid": 6
     },
     {
         "id": 7,
         "lastName": "Martinez",
         "firstName": "James",
-        "contact_no": "888-333-4444",
-        "department": "Neurology"
+        "departmentid": 7
     },
     {
         "id": 8,
         "lastName": "White",
         "firstName": "Emily",
-        "contact_no": "444-999-7777",
-        "department": "Psychiatry"
+        "departmentid": 8
     },
     {
         "id": 9,
         "lastName": "Harris",
         "firstName": "Robert",
-        "contact_no": "222-777-8888",
-        "department": "Gastroenterology"
+        "departmentid": 9
     },
     {
         "id": 10,
         "lastName": "Thompson",
         "firstName": "Jennifer",
-        "contact_no": "666-111-3333",
-        "department": "Urology"
+        "departmentid": 10
     }
 ]

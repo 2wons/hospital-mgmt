@@ -1,23 +1,26 @@
 [
     {
-        "id": 0,
-        "lastName": "Doeba",
-        "firstName": "John",
+        "id": 1,
+        "lastName": "John",
+        "firstName": "Doe",
         "dob": "1990-01-15",
-        "address": "123 Main St"
+        "address": "123 Main St",
+        "billings": []
     },
     {
-        "id": 0,
-        "lastName": "Smith",
-        "firstName": "Jane",
-        "dob": "1985-08-22",
-        "address": "456 Elm St"
+        "id": 2,
+        "lastName": "Alice",
+        "firstName": "Smith",
+        "dob": "1985-03-22",
+        "address": "456 Elm St",
+        "billings": []
     },
     {
-        "id": 0,
-        "lastName": "Johnson",
-        "firstName": "Mike",
-        "dob": "1975-05-10",
-        "address": "789 OakBABOY St"
+        "id": 3,
+        "lastName": "Bob",
+        "firstName": "Johnson",
+        "dob": "1978-07-10",
+        "address": "789 Oak St",
+        "billings": []
     }
 ]

@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "patientID": 2,
+        "departmentid": 2,
+        "date": "2023-03-12",
+        "diagnosis": "Upper Respiratory Infection",
+        "prescription": "Antibiotics, Rest, Fluids",
+        "treatment": "Rest and Stay Hydrated"
+    },
+    {
+        "id": 2,
+        "patientID": 3,
+        "departmentid": 2,
+        "date": "2023-03-12",
+        "diagnosis": "Hypertension",
+        "prescription": "Antihypertensive Medication, Diet Control",
+        "treatment": "Lifestyle Changes and Medication"
+    },
+    {
+        "id": 3,
+        "patientID": 2,
+        "departmentid": 2,
+        "date": "2023-03-12",
+        "diagnosis": "Type 2 Diabetes",
+        "prescription": "Insulin, Blood Sugar Monitoring",
+        "treatment": "Medication and Diet Management"
+    },
+    {
+        "id": 4,
+        "patientID": 1,
+        "departmentid": 2,
+        "date": "2023-03-13",
+        "diagnosis": "Fractured Arm",
+        "prescription": "Cast, Pain Medication",
+        "treatment": "Immobilization and Pain Relief"
+    },
+    {
+        "id": 5,
+        "patientID": 4,
+        "departmentid": 2,
+        "date": "2023-03-14",
+        "diagnosis": "Acute Bronchitis",
+        "prescription": "Bronchodilators, Cough Syrup",
+        "treatment": "Bronchitis Medication and Rest"
+    },
+    {
+        "id": 6,
+        "patientID": 5,
+        "departmentid": 2,
+        "date": "2023-03-15",
+        "diagnosis": "Migraine Headache",
+        "prescription": "Pain Relievers, Rest in Dark Room",
+        "treatment": "Migraine Management"
+    },
+    {
+        "id": 7,
+        "patientID": 3,
+        "departmentid": 2,
+        "date": "2023-03-16",
+        "diagnosis": "Gastroenteritis",
+        "prescription": "Fluid Replacement, Antiemetics",
+        "treatment": "Gastroenteritis Treatment"
+    },
+    {
+        "id": 8,
+        "patientID": 5,
+        "departmentid": 2,
+        "date": "2023-03-17",
+        "diagnosis": "Allergic Rhinitis",
+        "prescription": "Antihistamines, Nasal Spray",
+        "treatment": "Allergy Management"
+    },
+    {
+        "id": 9,
+        "patientID": 1,
+        "departmentid": 4,
+        "date": "2023-03-18",
+        "diagnosis": "Appendicitis",
+        "prescription": "Surgery, Antibiotics",
+        "treatment": "Appendicitis Treatment"
+    },
+    {
+        "id": 10,
+        "patientID": 4,
+        "departmentid": 6,
+        "date": "2023-03-19",
+        "diagnosis": "Common Cold",
+        "prescription": "Rest, Fluids, Over-the-Counter Medication",
+        "treatment": "Cold Symptom Relief"
+    }
+]
