@@ -35,6 +35,14 @@ bool isNumber(std::string str)
     }
 }
 
+std::string Prompt(std::string prompt)
+{
+    std::string input;
+    std::cout << prompt << ": ";
+    std::getline(std::cin, input);
+    return input;
+}
+
 inline void getNumber(const std::string& prompt, int& var, const MinMax& bounds)
 {
     string tmp;
