@@ -1,4 +1,4 @@
-#include "Doctor.h"
+#include "entity/Doctor.h"
 
 std::vector<string> Doctor::to_row() const
 {
