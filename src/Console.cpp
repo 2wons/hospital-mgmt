@@ -220,8 +220,8 @@ void Console::addItem()
     cout << "Enter Medicine name: "; 
     getline(cin, item.Name);
 
-	getNumber("Enter medicine Quantiy:", item.Quantity, MinMax(1, 999));
-	getNumber("Enter medicine Cost:", item.Quantity, MinMax(1, 999));
+    getNumber("Enter medicine Quantiy:", item.Quantity, MinMax(1, 999));
+    getNumber("Enter medicine Cost:", item.Quantity, MinMax(1, 999));
 
 	inventorydb.add(item);
     WriteLine("Medicin Item successfully added.");
@@ -276,7 +276,6 @@ void Console::viewDoctors()
                  "firstname",
                  "departmentid"},
                 doctorsdb.all());
-
 }
 
 void Console::viewItems()

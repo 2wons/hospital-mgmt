@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <string>
-#include <string>
 #include <vector>
 
 #include "tabulate.hpp"

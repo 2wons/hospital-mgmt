@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "Patient.h"
+#include "entity/Patient.h"
 
 void Patient::print()
 {

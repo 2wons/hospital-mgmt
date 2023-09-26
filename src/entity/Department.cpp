@@ -1,4 +1,4 @@
-#include "Department.h"
+#include "entity/Department.h"
 
 bool Department::operator==(const int& other) const
 {
