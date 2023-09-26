@@ -42,7 +42,15 @@ inline void getNumber(const std::string& prompt, int& var, const MinMax& bounds)
 	while (true)
 	{
 		cout << prompt << ": ";
-		cin >> var;
+		getline(cin, tmp);
+
+        if (!isNumber(tmp))
+        {
+            std::cout << "inValid number: " << tmp << std::endl;
+			continue;
+        }
+
+        var = stoi(tmp);
 
 		if (var >= bounds.min && var <= bounds.max) {
 			break;
@@ -51,9 +59,6 @@ inline void getNumber(const std::string& prompt, int& var, const MinMax& bounds)
 			cout << "Please enter a valid number (" 
                  << bounds.min << "-"
                  << bounds.max << ")\n\n"; 
-
-			cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 	}
 }
@@ -83,7 +88,6 @@ inline void getNumber(const std::string& prompt, int& var, std::vector<T> myList
         cin.clear();
 	}
 }
-
 
 std::string formatDate(int month, int day, int year) {
     // Convert integers to strings and format the date
