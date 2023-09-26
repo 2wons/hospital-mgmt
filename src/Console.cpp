@@ -206,8 +206,10 @@ void Console::addRecord()
     int count;
     cin >> count;
     WriteLine("--------------------------------");
+    //auto patient = patientsdb.find(record.patientID);
 
     cin.ignore();
+    int totalCost;
     for (int i = 0; i < count; i++)
     {
         int itemid, quantity;
@@ -216,6 +218,7 @@ void Console::addRecord()
         getNumber("Enter quantity: ", quantity, MinMax(1, item->Quantity));
         record.prescriptions[item->Name] = quantity;
         item->Quantity -= quantity;
+        totalCost += item->Cost * quantity;
         WriteLine("-------------------------");
     }
     WriteLine("-------------------------");
