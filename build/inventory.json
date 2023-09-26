@@ -1,60 +1,60 @@
 [
     {
-	"id": 1,
+	    "id": 1,
         "Name": "Biogesic",
         "Quantity": 30,
         "Cost": 100
     },
     {
-	"id": 2,
+	    "id": 2,
         "Name": "Aspirin",
         "Quantity": 50,
         "Cost": 75
     },
     {
-	"id": 3,
+	    "id": 3,
         "Name": "Ibuprofen",
         "Quantity": 20,
         "Cost": 120
     },
     {
-	"id": 4,
+	    "id": 4,
         "Name": "Paracetamol",
         "Quantity": 40,
         "Cost": 90
     },
     {
-	"id": 1,
+	    "id": 1,
         "Name": "Loratadine",
         "Quantity": 25,
         "Cost": 60
     },
     {
-	"id": 5,
+	    "id": 5,
         "Name": "Amoxicillin",
         "Quantity": 15,
         "Cost": 150
     },
     {
-	"id": 6,
+	    "id": 6,
         "Name": "Cetirizine",
         "Quantity": 35,
         "Cost": 80
     },
     {
-	"id": 7,
+	    "id": 7,
         "Name": "Ranitidine",
         "Quantity": 18,
         "Cost": 110
     },
     {
-	"id": 8,
+	    "id": 8,
         "Name": "Omeprazole",
         "Quantity": 28,
         "Cost": 130
     },
     {
-	"id": 9,
+	    "id": 9,
         "Name": "Vitamin C",
         "Quantity": 60,
         "Cost": 50
