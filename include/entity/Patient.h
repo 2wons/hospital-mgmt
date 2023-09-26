@@ -17,8 +17,6 @@ public:
 
     bool operator==(const int& other) const;
 
-    void print();
-
     std::vector<string> to_row() const;
     
     int id;
