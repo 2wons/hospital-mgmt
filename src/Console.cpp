@@ -195,17 +195,33 @@ void Console::addRecord()
 
     WriteLine("Available departments: ");
     for (auto& department : departmentsdb.all())
-        cout << department.id << ", " << department.dptname << endl;
+        cout << department.id << ": " << department.dptname << endl;
 
     getNumber("Enter department id: ", record.departmentid, departmentsdb.all());
 
+    record.date         = Prompt("Enter date: ");
+    record.diagnosis    = Prompt("Enter diagnosis: ");
 
-    cout << "Enter date";
-    cin >> record.date;
-    cout << "Enter diagnosis";
-    cin >> record.diagnosis;
-    cout << "Enter prescription";
-    cin >> record.prescription;
+    prettyTable({"id", "name", "quantity", "cost"}, inventorydb.all());
+
+    WriteLine("----------Prescriptions---------");
+    cout << "How many items to add? ";
+    int count;
+    cin >> count;
+    WriteLine("--------------------------------");
+
+    cin.ignore();
+    for (int i = 0; i < count; i++)
+    {
+        int itemid, quantity;
+        getNumber("Enter item id: ", itemid, inventorydb.all());
+        auto item = inventorydb.find(itemid);
+        getNumber("Enter quantity: ", quantity, MinMax(1, item->Quantity));
+        record.prescriptions[item->Name] = quantity;
+        item->Quantity -= quantity;
+        WriteLine("-------------------------");
+    }
+    WriteLine("-------------------------");
 
     recordsdb.add(record);
 }
@@ -281,7 +297,7 @@ void Console::viewDoctors()
 void Console::viewItems()
 {
     WriteLine("[Viewing Medicine Items]\n");
-    prettyTable({"Name", "Quantity", "Cost"}, inventorydb.all());
+    prettyTable({"ID", "Name", "Quantity", "Cost"}, inventorydb.all());
 }
 
 void Console::findPatient()

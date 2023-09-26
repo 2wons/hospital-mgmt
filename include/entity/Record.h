@@ -3,6 +3,7 @@
 #include "json.hpp"
 #include <string>
 #include <vector>
+#include <map>
 
 using std::string;
 using namespace nlohmann;
@@ -10,7 +11,7 @@ using namespace nlohmann;
 class Record
 {
 private:
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Record, id, patientID, departmentid, date, diagnosis, prescription, treatment);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Record, id, patientID, departmentid, date, diagnosis, prescriptions, treatment);
 
 public:
 
@@ -28,6 +29,7 @@ public:
     int departmentid;
     string date;
     string diagnosis;
-    string prescription;
     string treatment;
+
+    std::map<string, int> prescriptions;
 };
