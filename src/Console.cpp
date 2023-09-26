@@ -143,13 +143,12 @@ void Console::medical()
 void Console::addPatient()
 {
     WriteLine("[Adding New Patient]\n");
+    cin.ignore();
 
     Patient patient;
-    cout << "Enter last name: ";
-    cin >> patient.lastName;
-    cout << "Enter first name: ";
-    cin >> patient.firstName;
-    cin.ignore();
+    patient.lastName = Prompt("Enter last name: ");
+    patient.firstName = Prompt("Enter first name: ");
+
     int month, day, year;
 
     getNumber("Enter a month of birth (number)", month,   MinMax(1,12));
@@ -157,10 +156,8 @@ void Console::addPatient()
     getNumber("Enter a year of birth  (number)",  year,   MinMax(1700, 2099));
 
     patient.dob = formatDate(month, day, year);
-
-    cout << "Enter address: ";
-    cin.ignore();
-    getline(cin, patient.address);
+;
+    patient.address = Prompt("Enter address: ");
 
     patientsdb.add(patient);
 }
@@ -168,12 +165,12 @@ void Console::addPatient()
 void Console::addDoctor()
 {
     WriteLine("[Adding New Doctor]\n");
+    cin.ignore();
 
     Doctor doctor;
-    cout << "Enter last name: ";
-    cin >> doctor.lastName;
-    cout << "Enter first name: ";
-    cin >> doctor.firstName;
+
+    doctor.lastName  = Prompt("Enter last name: ");
+    doctor.firstName = Prompt("Enter first name: ");
 
     WriteLine("Available departments: ");
     for (auto& department : departmentsdb.all())
@@ -229,12 +226,10 @@ void Console::addRecord()
 void Console::addItem()
 {
     WriteLine("[Adding New Medicine Item]\n");
-
-    Item item;
     cin.ignore();
 
-    cout << "Enter Medicine name: "; 
-    getline(cin, item.Name);
+    Item item;
+    item.Name = Prompt("Enter Medicine name: ");
 
     getNumber("Enter medicine Quantiy:", item.Quantity, MinMax(1, 999));
     getNumber("Enter medicine Cost:", item.Quantity, MinMax(1, 999));
