@@ -17,6 +17,8 @@ public:
     Item() {}
 
     std::vector<string> to_row() const;
+    
+    bool operator==(const int& other) const;
 
     int id;
     string Name;
