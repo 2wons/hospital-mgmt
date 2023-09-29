@@ -10,8 +10,8 @@
 
 using std::cin;
 using std::cout;
-using std::vector;
 using std::string;
+using std::vector;
 
 using namespace tabulate;
 
@@ -21,17 +21,20 @@ struct MinMax
 {
     MinMax(int min, int max)
         : min(min), max(max) {}
-    
+
     int min;
     int max;
 };
 
 bool isNumber(std::string str)
 {
-	try {
+    try
+    {
         std::stoi(str);
         return true;
-    } catch (const std::exception &e) {
+    }
+    catch (const std::exception &e)
+    {
         return false;
     }
 }
@@ -44,75 +47,79 @@ std::string Prompt(std::string prompt)
     return input;
 }
 
-inline void getNumber(const std::string& prompt, int& var, const MinMax& bounds)
+inline void getNumber(const std::string &prompt, int &var, const MinMax &bounds)
 {
     string tmp;
 
-	while (true)
-	{
-		cout << prompt << ": ";
-		getline(cin, tmp);
+    while (true)
+    {
+        cout << prompt << ": ";
+        getline(cin, tmp);
 
         if (!isNumber(tmp))
         {
             std::cout << "inValid number: " << tmp << std::endl;
-			continue;
+            continue;
         }
 
         var = stoi(tmp);
 
-		if (var >= bounds.min && var <= bounds.max) {
-			break;
-		}
-		else {
-			cout << "Please enter a valid number (" 
+        if (var >= bounds.min && var <= bounds.max)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Please enter a valid number ("
                  << bounds.min << "-"
-                 << bounds.max << ")\n\n"; 
-		}
-	}
+                 << bounds.max << ")\n\n";
+        }
+    }
 }
 
 template <typename T>
-inline void getNumber(const std::string& prompt, int& var, std::vector<T> myList)
+inline void getNumber(const std::string &prompt, int &var, std::vector<T> myList)
 {
     string tmp;
-	while (true)
-	{
-		cout << prompt << ": ";
-		std::getline(std::cin, tmp);
+    while (true)
+    {
+        cout << prompt << ": ";
+        std::getline(std::cin, tmp);
 
-		if (!isNumber(tmp)) 
-		{
-			std::cout << "inValid number: " << tmp << std::endl;
-			continue;
-		}
+        if (!isNumber(tmp))
+        {
+            std::cout << "inValid number: " << tmp << std::endl;
+            continue;
+        }
 
         var = stoi(tmp);
 
         auto it = std::find(myList.begin(), myList.end(), var);
 
-        if (it != myList.end()) break;
+        if (it != myList.end())
+            break;
 
         cout << "Please enter a valid id" << endl;
         cin.clear();
-	}
+    }
 }
 
-std::string formatDate(int month, int day, int year) {
+std::string formatDate(int month, int day, int year)
+{
     // Convert integers to strings and format the date
     std::string formattedDate = std::to_string(month) + "-" + std::to_string(day) + "-" + std::to_string(year);
     return formattedDate;
 }
 
 template <class T>
-void prettyTable(vector<string> headers, vector<T> collection, int mode=0)
+void prettyTable(vector<string> headers, vector<T> collection, int mode = 0)
 {
     Table table;
     table.format().locale("C");
 
     table.add_row(Row_t(headers.begin(), headers.end()));
 
-    for (const auto& v : collection)
+    for (const auto &v : collection)
     {
         vector<string> row = v.to_row();
 
@@ -120,18 +127,14 @@ void prettyTable(vector<string> headers, vector<T> collection, int mode=0)
     }
 
     // center-align and color header cells
-    for (size_t i = 0; i < headers.size(); ++i) 
+    for (size_t i = 0; i < headers.size(); ++i)
     {
-        table[0][i].format()
-        .font_color(Color::yellow)
-        .font_align(FontAlign::center)
-        .font_style({FontStyle::bold});
+        table[0][i].format().font_color(Color::yellow).font_align(FontAlign::center).font_style({FontStyle::bold});
     }
 
     // set last column to a 40 max width
     if (mode > 0)
-         table.column(headers.size()-1).format()
-            .width(40);
+        table.column(headers.size() - 1).format().width(40);
 
     std::cout << table << std::endl;
 }
@@ -142,13 +145,14 @@ enum Date
     TOMORROW
 };
 
-std::string getDate(Date date) 
+std::string getDate(Date date)
 {
     // Get the current time
     std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
 
     // Add one day if tomorrow is true
-    if (date == TOMORROW) {
+    if (date == TOMORROW)
+    {
         currentTime += std::chrono::hours(24);
     }
 
@@ -156,7 +160,7 @@ std::string getDate(Date date)
     std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
 
     // Convert to a struct tm for formatting
-    std::tm* currentTime_tm = std::localtime(&currentTime_t);
+    std::tm *currentTime_tm = std::localtime(&currentTime_t);
 
     // Format the date
     char buffer[80];
