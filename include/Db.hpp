@@ -39,6 +39,7 @@ public:
 
     void add(T item) 
     { 
+        item.setID(makeId());
         db.push_back(item); 
     }
 
@@ -76,7 +77,7 @@ public:
 
     int makeId()
     {
-        int latest = db[db.size()-1].id;
+        int latest = db[db.size()-1].getID();
 
         while (true)
         {

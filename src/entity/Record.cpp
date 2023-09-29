@@ -1,16 +1,6 @@
 #include "entity/Record.h"
 #include <iostream>
 
-void Record::print()
-{
-    ///std::cout << id << ": " << PatientID << ", " << date << ", " << attendingPerson << std::endl;
-}
-
-bool Record::operator==(const int& other) const
-{
-    return this->id == other;
-}
-
 std::vector<string> Record::to_row() const
 {
     // retrieve items and make them into a string with format "ItemName - x<Quantity>"

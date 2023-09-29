@@ -173,7 +173,7 @@ void Console::addDoctor()
 
     WriteLine("Available departments: ");
     for (auto& department : departmentsdb.all())
-        cout << "[" << department.id << "]" << department.dptname << endl;
+        cout << "[" << department.getID() << "]" << department.dptname << endl;
 
     getNumber("Enter department id: ", doctor.departmentid, departmentsdb.all());
 
@@ -185,14 +185,13 @@ void Console::addRecord()
 {
     WriteLine("[Adding New Patient Medical Record]\n");
     Record record;
-    record.id = recordsdb.makeId();
     cin.ignore();
     
     getNumber("Enter patient id: ",    record.patientID,    patientsdb.all());
 
     WriteLine("Available departments: ");
     for (auto& department : departmentsdb.all())
-        cout << department.id << ": " << department.dptname << endl;
+        cout << department.getID() << ": " << department.dptname << endl;
 
     getNumber("Enter department id: ", record.departmentid, departmentsdb.all());
 
@@ -254,11 +253,9 @@ void Console::viewDepartmentRecords()
 
     getNumber("Enter department id: (number): ", deptid, departmentsdb.all());
     std::vector<Record> results = recordsdb.where(
-        [&deptid](const Record& r) 
-        { return r.departmentid == deptid; });
+        [&deptid](const Record& r) { return r.departmentid == deptid; });
     
-    if (results.empty())
-    {
+    if (results.empty()) {
         WriteLine("No records found");
         return;
     }
@@ -316,7 +313,7 @@ void Console::findPatient()
     const auto records = recordsdb.where(
         [&patientId](const Record& r) {return r.patientID == patientId;});
 
-    cout << "Patient ID    : " << it->id        << endl;
+    cout << "Patient ID    : " << it->getID()   << endl;
     cout << "Last Name     : " << it->lastName  << endl;
     cout << "First Name    : " << it->firstName << endl;
     cout << "Date of Birth : " << it->dob       << endl;
@@ -329,8 +326,7 @@ void Console::findPatient()
         "date",
         "diagnosis",
         "prescriptions",
-        "treatments",
-        "balance"},
+        "treatments"},
         records);
 
 }

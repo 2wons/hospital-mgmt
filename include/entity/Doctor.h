@@ -2,12 +2,14 @@
 
 #include <string>
 #include <vector>
+
 #include "json.hpp"
+#include "Entity.h"
 
 using std::string;
 using namespace nlohmann;
 
-class Doctor
+class Doctor : public Entity
 {
 private:
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Doctor, id, lastName, firstName, departmentid);
@@ -17,7 +19,6 @@ public:
 
     std::vector<string> to_row() const;
     
-    int id;
     string lastName;
     string firstName;
     int departmentid;

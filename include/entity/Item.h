@@ -4,11 +4,12 @@
 #include <vector>
 
 #include "json.hpp"
+#include "Entity.h"
 
 using std::string;
 using namespace nlohmann;
 
-class Item
+class Item : public Entity
 {
 private:
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Item, id, Name, Quantity, Cost);
@@ -17,10 +18,7 @@ public:
     Item() {}
 
     std::vector<string> to_row() const;
-    
-    bool operator==(const int& other) const;
 
-    int id;
     string Name;
     int Quantity;
     double Cost;

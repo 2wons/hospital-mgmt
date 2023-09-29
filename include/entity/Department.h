@@ -1,9 +1,11 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "json.hpp"
 
-class Department
+#include "json.hpp"
+#include "Entity.h"
+
+class Department : public Entity
 {
 private:
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Department, id, dptname);
@@ -11,10 +13,7 @@ private:
 public:
     Department() {}
 
-    bool operator==(const int& other) const;
-
     std::vector<std::string> to_row() const;
 
-    int id;
     std::string dptname;
 };
