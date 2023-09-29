@@ -17,6 +17,8 @@ public:
     Patient() {}
 
     std::vector<string> to_row() const;
+
+    string fullName() const;
     
     double balance;
     string lastName;
