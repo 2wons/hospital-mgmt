@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "senderID": 1,
+        "receiverID": 2,
+        "body": "This is a simple message :D"
+    },
+    {
+        "id": 2,
+        "senderID": 2,
+        "receiverID": 1,
+        "body": "This is a very very very bery very very very beryvery very very beryvery very very bery long message that should wrap"
+    },
+    {
+        "id": 3,
+        "senderID": 1,
+        "receiverID": 2,
+        "body": "This is a another message :D"
+    },
+    {
+        "id": 4,
+        "senderID": 1,
+        "receiverID": 2,
+        "body": "I lvoe you"
+    }
+]

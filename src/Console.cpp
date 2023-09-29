@@ -241,7 +241,7 @@ void Console::addItem()
     getNumber("Enter medicine Cost:", item.Quantity, MinMax(1, 999));
 
 	inventorydb.add(item);
-    WriteLine("Medicin Item successfully added.");
+    WriteLine("Medicine Item successfully added.");
 }
 
 void Console::viewDepartmentRecords()
@@ -331,6 +331,88 @@ void Console::findPatient()
 
 }
 
+void Console::messages()
+{
+   WriteLine("----Messages[Doctor to Doctor]-----");
+   WriteLine("[1] Send New Message              ");
+   WriteLine("[2] View all                      ");
+   WriteLine("[3] View my inbox                 ");
+   WriteLine("\n[4] ->Back to Main Menu         ");
+
+   int choice;
+   getNumber("input choice > ", choice, MinMax(1,4));
+
+   Clear();
+
+   switch (choice)
+    {
+        case 1: addMessage();
+            break;
+        case 2: viewAllMessages();
+            break;
+        case 3: viewInbox();
+            break;
+        case 4: return;
+            break;
+
+        default: WriteLine("invalid");
+    }
+}
+
+void Console::addMessage()
+{
+    cout << "[Compose New Message to Doctor]\n" << endl;
+    int sender, receiver;
+    std::vector<Doctor> all = doctorsdb.all();
+
+    getNumber("From[Your Doctor id]: ", sender, all);
+    getNumber("To[Receiver Doctor id]: ", receiver, all);
+
+    std::string body;
+    body = Prompt("Write Message: \n --> ");
+    messagesdb.add({sender, receiver, body});
+    cout << "[Message Successfully added]" << endl;
+
+}
+
+void Console::viewInbox()
+{
+    cout << "[View your messages]\n" << endl;
+
+    int doctorid; cin.ignore();
+    getNumber("Enter Doctor id: ", doctorid, MinMax(1,999));
+
+    auto doctor = doctorsdb.find(doctorid);
+
+    if (doctor == doctorsdb.all().end()) {
+        WriteLine("Doctor does not exist");
+        return;
+    }
+
+    const auto messages = messagesdb.where(
+        [&doctorid](const Message& m) {return m.getReceiverID() == doctorid;});
+    
+    cout << "[Received Messages]\n\n";
+    
+    prettyTable({
+        "id",
+        "sender_id",
+        "receiver_id",
+        "body"
+    }, messages, 1);
+
+}
+
+void Console::viewAllMessages()
+{
+    prettyTable({
+        "id",
+        "sender_id",
+        "receiver_id",
+        "body"
+    }, messagesdb.all(), 1);
+}
+
 void Console::WriteLine(const string& prompt, int spaces)
 {
     cout << std::string(spaces, ' ') << prompt << "\n";
@@ -357,7 +439,8 @@ void Console::Clear()
 
 void Console::onExit()
 {
-    patientsdb.save();
-    departmentsdb.save();
-    recordsdb.save();
+    //patientsdb.save();
+    //departmentsdb.save();
+    //recordsdb.save();
+    messagesdb.save();
 }

@@ -104,7 +104,7 @@ std::string formatDate(int month, int day, int year) {
 }
 
 template <class T>
-void prettyTable(vector<string> headers, vector<T> collection)
+void prettyTable(vector<string> headers, vector<T> collection, int mode=0)
 {
     Table table;
     table.format().locale("C");
@@ -126,6 +126,10 @@ void prettyTable(vector<string> headers, vector<T> collection)
         .font_align(FontAlign::center)
         .font_style({FontStyle::bold});
     }
+
+    if (mode > 0)
+         table.column(headers.size()-1).format()
+            .width(40);
 
     std::cout << table << std::endl;
 }

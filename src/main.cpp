@@ -48,7 +48,7 @@ int main()
             break;
         
         case 7:
-            console.test("message");
+            console.messages();
             break;
 
         default:
@@ -67,5 +67,5 @@ int main()
 
     } while (choice != 999);
 
-    //console.onExit();
+    console.onExit();
 }

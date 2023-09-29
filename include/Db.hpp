@@ -77,6 +77,9 @@ public:
 
     int makeId()
     {
+        if (db.empty())
+            return 1;
+        
         int latest = db[db.size()-1].getID();
 
         while (true)

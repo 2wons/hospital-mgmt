@@ -15,6 +15,7 @@ set(SOURCE_FILES
     src/entity/Record.cpp
     src/entity/Doctor.cpp
     src/entity/Item.cpp
+    src/entity/Message.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
