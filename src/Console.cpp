@@ -370,6 +370,16 @@ void Console::addMessage()
 
     std::string body;
     body = Prompt("Write Message: \n --> ");
+
+    auto it = doctorsdb.find(sender);
+    string passkey = Prompt("Enter doctor passkey to confirm: ");
+
+    if (passkey != it->getPasskey())
+    {
+        cout << "[!Invalid passkey.]" << endl;
+        return;
+    }
+
     messagesdb.add({sender, receiver, body});
     cout << "[Message Successfully added]" << endl;
 
@@ -386,6 +396,14 @@ void Console::viewInbox()
 
     if (doctor == doctorsdb.all().end()) {
         WriteLine("Doctor does not exist");
+        return;
+    }
+
+    string passkey = Prompt("Enter doctor passkey to confirm: ");
+    
+    if (passkey != doctor->getPasskey())
+    {
+        cout << "[!Invalid passkey.]" << endl;
         return;
     }
 
