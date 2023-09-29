@@ -127,6 +127,7 @@ void prettyTable(vector<string> headers, vector<T> collection, int mode=0)
         .font_style({FontStyle::bold});
     }
 
+    // set last column to a 40 max width
     if (mode > 0)
          table.column(headers.size()-1).format()
             .width(40);
