@@ -10,7 +10,7 @@ using namespace nlohmann;
 class Patient
 {
 private:
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Patient, id, lastName, firstName, dob, address, billings);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Patient, id, lastName, firstName, dob, address, balance);
 
 public:
     Patient() {}
@@ -20,6 +20,7 @@ public:
     std::vector<string> to_row() const;
     
     int id;
+    double balance;
     string lastName;
     string firstName;
     string dob;

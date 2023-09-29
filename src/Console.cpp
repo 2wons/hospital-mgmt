@@ -130,13 +130,12 @@ void Console::medical()
 
    Clear();
 
-   if (choice == 1)
+   switch (choice)
    {
-       addRecord();
-   }
-   else if (choice == 2)
-   {
-       viewDepartmentRecords();
+        case 1: addRecord(); 
+            break;
+        case 2: viewDepartmentRecords(); 
+            break;
    }
 }
 
@@ -186,6 +185,7 @@ void Console::addRecord()
 {
     WriteLine("[Adding New Patient Medical Record]\n");
     Record record;
+    record.id = recordsdb.makeId();
     cin.ignore();
     
     getNumber("Enter patient id: ",    record.patientID,    patientsdb.all());
@@ -206,10 +206,10 @@ void Console::addRecord()
     int count;
     cin >> count;
     WriteLine("--------------------------------");
-    //auto patient = patientsdb.find(record.patientID);
+    auto patient = patientsdb.find(record.patientID);
 
     cin.ignore();
-    int totalCost;
+    double totalCost;
     for (int i = 0; i < count; i++)
     {
         int itemid, quantity;
@@ -222,7 +222,11 @@ void Console::addRecord()
         WriteLine("-------------------------");
     }
     WriteLine("-------------------------");
+    //@TODO make proper function for this
+    // maybe cost shouldn't be added if the patient has insurance
+    patient->balance += totalCost;
 
+    record.treatment = Prompt("Enter Treatments: ");
     recordsdb.add(record);
 }
 
@@ -278,7 +282,8 @@ void Console::viewPatients()
                  "lastname",
                  "firstname",
                  "dob",
-                 "address"},
+                 "address",
+                 "balance"},
                 patientsdb.all());
 }
 
@@ -300,7 +305,7 @@ void Console::viewItems()
 
 void Console::findPatient()
 {
-    int patientId;
+    int patientId; cin.ignore();
     getNumber("Enter patient id: (number): ", patientId, MinMax(1,999));
     auto it = patientsdb.find(patientId);
 
@@ -324,7 +329,8 @@ void Console::findPatient()
         "date",
         "diagnosis",
         "prescriptions",
-        "treatments"},
+        "treatments",
+        "balance"},
         records);
 
 }
