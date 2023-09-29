@@ -44,7 +44,7 @@ int main()
             break;
         
         case 6:
-            console.test("schedule");
+            console.appointments();
             break;
         
         case 7:

@@ -13,6 +13,7 @@
 #include "entity/Doctor.h"
 #include "entity/Item.h"
 #include "entity/Message.h"
+#include "entity/Appointment.h"
 
 using namespace std;
 
@@ -28,7 +29,8 @@ public:
         recordsdb("records.json"),
         doctorsdb("doctors.json"), 
         inventorydb("inventory.json"),
-        messagesdb("messages.json")
+        messagesdb("messages.json"),
+        appointmentsdb("appointments.json")
     {
 
     }
@@ -72,6 +74,12 @@ public:
 
     void viewAllMessages();
 
+    void appointments();
+
+    void addAppointment();
+
+    void cancelAppointment();
+
     void viewInbox();
 
     void onExit();
@@ -89,10 +97,11 @@ public:
     static void Clear();
 
 private:
-    Db<Patient> patientsdb;
-    Db<Record> recordsdb;
-    Db<Department> departmentsdb;
-    Db<Doctor> doctorsdb;
-    Db<Item> inventorydb;
-    Db<Message> messagesdb;
+    Db<Patient>         patientsdb;
+    Db<Record>          recordsdb;
+    Db<Department>      departmentsdb;
+    Db<Doctor>          doctorsdb;
+    Db<Item>            inventorydb;
+    Db<Message>         messagesdb;
+    Db<Appointment>     appointmentsdb;
 };

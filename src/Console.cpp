@@ -1,5 +1,7 @@
 #include "Console.h"
 #include "input.hpp"
+#include "ctime"
+
 /*
 
 1/ retrieve doctors from that department
@@ -431,6 +433,104 @@ void Console::viewAllMessages()
     }, messagesdb.all(), 1);
 }
 
+void Console::appointments()
+{
+   WriteLine("----Messages[Doctor to Doctor]-----");
+   WriteLine("[1] Make Appointment              ");
+   WriteLine("[2] Cancel Appointment            ");
+   WriteLine("\n[3] ->Back to Main Menu         ");
+
+   int choice;
+   getNumber("input choice > ", choice, MinMax(1,3));
+
+   Clear();
+
+   switch (choice)
+    {
+        case 1: addAppointment();
+            break;
+        case 2: cancelAppointment();
+            break;
+        case 3: return;
+            break;
+
+        default: WriteLine("invalid");
+    }
+}
+
+void Console::addAppointment()
+{
+    cout << "[Add appointment (automatic doctor patient matching)]" << endl;
+
+    int patientid, deptid;
+    string subject, date;
+
+    getNumber("Enter Patient ID: ", patientid, MinMax(1,999));
+    
+    auto patient = patientsdb.find(patientid);
+
+    if (patient == patientsdb.all().end())
+    {
+        cout << "\n[Invalid patient id]";
+        return;
+    }
+
+    WriteLine("Available departments: ");
+    for (auto& department : departmentsdb.all())
+        cout << department.getID() << ": " << department.dptname << endl;
+    
+    getNumber("Enter Department id: ", deptid, departmentsdb.all());
+
+    std::vector<Doctor> doctors = doctorsdb.where(
+        [&deptid](const Doctor& d) { return d.departmentid == deptid; });
+    
+    int min = doctors[0].numAppointments;
+    Doctor selectedDoctor = doctors[0];
+
+    for (auto doc : doctors) {
+        if (doc.numAppointments < min)
+            selectedDoctor = doc;
+    }
+
+    date = getDate(TOMORROW);
+
+    auto doctor = doctorsdb.find(selectedDoctor.getID());
+    
+    cout << "---------------------------" << endl;
+
+
+    cout << "[New appointment created]" << endl;
+    cout << "Patient: " << patient->fullName() << endl;
+    cout << "Doctor: " << doctor->fullName() << endl;
+    cout << "Date: " << date << endl ;
+    cout << "What is the subject of the appointment? \n -->  ";
+    subject = Prompt("Enter appointment subject: ");
+
+    appointmentsdb.add({patientid, doctor->getID(), date, subject});
+    doctor->numAppointments += 1;
+    
+    cout << "\n[Appointment successfully created]" << endl;
+
+}
+
+void Console::cancelAppointment()
+{
+    cout << "[Add appointment (automatic doctor patient matching)]" << endl;
+    int appt_id;
+    getNumber("Enter apopintment id: ", appt_id, MinMax(1,999));
+    auto it = appointmentsdb.find(appt_id);
+
+    if (it == appointmentsdb.all().end()) {
+        cout << "appointment does not exist" << endl;
+        return;
+    }
+
+    appointmentsdb.remove(appt_id);
+
+    cout << "\n[Appointment successfully cancelled]" << endl;
+
+}
+
 void Console::WriteLine(const string& prompt, int spaces)
 {
     cout << std::string(spaces, ' ') << prompt << "\n";
@@ -460,5 +560,6 @@ void Console::onExit()
     //patientsdb.save();
     //departmentsdb.save();
     //recordsdb.save();
-    messagesdb.save();
+    //messagesdb.save();
+    appointmentsdb.save();
 }
