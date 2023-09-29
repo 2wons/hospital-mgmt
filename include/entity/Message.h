@@ -19,6 +19,10 @@ public:
 
     int getReceiverID() const;
 
+    int getSenderID() const;
+
+    std::string getBody() const;
+
 
 private:
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Message, id, senderID, receiverID, body);

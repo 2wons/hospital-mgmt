@@ -17,3 +17,13 @@ int Message::getReceiverID() const
 {
     return receiverID;
 }
+
+int Message::getSenderID() const
+{
+    return senderID;
+}
+
+std::string Message::getBody() const
+{
+    return body;
+}
