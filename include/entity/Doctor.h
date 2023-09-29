@@ -12,7 +12,7 @@ using namespace nlohmann;
 class Doctor : public Entity
 {
 private:
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Doctor, id, lastName, firstName, departmentid, passkey);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Doctor, id, lastName, firstName, numAppointments, departmentid, passkey);
 
     string passkey;
 
@@ -24,6 +24,9 @@ public:
     string lastName;
     string firstName;
     int departmentid;
+    int numAppointments;
 
     string getPasskey() const;
+
+    string fullName() const;
 };

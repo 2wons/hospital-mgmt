@@ -9,3 +9,8 @@ string Doctor::getPasskey() const
 {
     return passkey;
 }
+
+string Doctor::fullName() const
+{
+    return "(" + std::to_string(id) + ") Dr. " + firstName + " " + lastName;
+}
