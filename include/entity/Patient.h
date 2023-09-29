@@ -25,5 +25,4 @@ public:
     string firstName;
     string dob;
     string address;
-    std::vector<string> billings;
 };
