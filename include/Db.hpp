@@ -57,9 +57,9 @@ public:
         return std::find(db.begin(), db.end(), id);
     }
 
-    T remove() 
+    void remove(const int& id) 
     {
-        //implement
+        std::remove(db.begin(), db.end(), id);
     }
 
     std::vector<T> where(std::function<bool(const T)> callback)
