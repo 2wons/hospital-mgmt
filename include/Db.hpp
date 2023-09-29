@@ -74,6 +74,20 @@ public:
         return results;
     }
 
+    int makeId()
+    {
+        int latest = db[db.size()-1].id;
+
+        while (true)
+        {
+            latest++;
+            if (find(latest) == db.end())
+                break;
+        }
+        return latest;
+
+    }
+
 private:
     std::vector<T> db;
     std::string file;
