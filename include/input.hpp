@@ -3,7 +3,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <limits>
+#include <chrono>
+#include <ctime>
 
 #include "tabulate.hpp"
 
@@ -133,4 +134,33 @@ void prettyTable(vector<string> headers, vector<T> collection, int mode=0)
             .width(40);
 
     std::cout << table << std::endl;
+}
+
+enum Date
+{
+    TODAY,
+    TOMORROW
+};
+
+std::string getDate(Date date) 
+{
+    // Get the current time
+    std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
+
+    // Add one day if tomorrow is true
+    if (date == TOMORROW) {
+        currentTime += std::chrono::hours(24);
+    }
+
+    // Convert the time_point to a time_t for formatting
+    std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
+
+    // Convert to a struct tm for formatting
+    std::tm* currentTime_tm = std::localtime(&currentTime_t);
+
+    // Format the date
+    char buffer[80];
+    std::strftime(buffer, sizeof(buffer), "%Y-%m-%d", currentTime_tm);
+
+    return buffer;
 }
