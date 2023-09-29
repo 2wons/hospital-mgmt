@@ -129,7 +129,10 @@ void prettyTable(vector<string> headers, vector<T> collection, int mode = 0)
     // center-align and color header cells
     for (size_t i = 0; i < headers.size(); ++i)
     {
-        table[0][i].format().font_color(Color::yellow).font_align(FontAlign::center).font_style({FontStyle::bold});
+        table[0][i].format()
+            .font_color(Color::yellow)
+            .font_align(FontAlign::center)
+            .font_style({FontStyle::bold});
     }
 
     // set last column to a 40 max width
