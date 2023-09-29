@@ -4,14 +4,15 @@
 #include <vector>
 
 #include "json.hpp"
+#include "Entity.h"
 
 using std::string;
 using namespace nlohmann;
 
-class Item
+class Item : public Entity
 {
 private:
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Item, Name, Quantity, Cost);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Item, id, Name, Quantity, Cost);
 
 public:
     Item() {}

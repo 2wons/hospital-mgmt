@@ -5,8 +5,11 @@
         "departmentid": 2,
         "date": "2023-03-12",
         "diagnosis": "Upper Respiratory Infection",
-        "prescription": "Antibiotics, Rest, Fluids",
-        "treatment": "Rest and Stay Hydrated"
+        "treatment": "Rest and Stay Hydrated",
+        "prescriptions": {
+            "Biogesic": 2,
+            "Aspirin": 2
+        }
     },
     {
         "id": 2,
@@ -14,8 +17,11 @@
         "departmentid": 2,
         "date": "2023-03-12",
         "diagnosis": "Hypertension",
-        "prescription": "Antihypertensive Medication, Diet Control",
-        "treatment": "Lifestyle Changes and Medication"
+        "treatment": "Lifestyle Changes and Medication",
+        "prescriptions": {
+            "Biogesic": 2,
+            "Aspirin": 2
+        }
     },
     {
         "id": 3,
@@ -23,8 +29,11 @@
         "departmentid": 2,
         "date": "2023-03-12",
         "diagnosis": "Type 2 Diabetes",
-        "prescription": "Insulin, Blood Sugar Monitoring",
-        "treatment": "Medication and Diet Management"
+        "treatment": "Medication and Diet Management",
+        "prescriptions": {
+            "Biogesic": 2,
+            "Aspirin": 2
+        }
     },
     {
         "id": 4,
@@ -32,8 +41,11 @@
         "departmentid": 2,
         "date": "2023-03-13",
         "diagnosis": "Fractured Arm",
-        "prescription": "Cast, Pain Medication",
-        "treatment": "Immobilization and Pain Relief"
+        "treatment": "Immobilization and Pain Relief",
+        "prescriptions": {
+            "Biogesic": 2,
+            "Aspirin": 2
+        }
     },
     {
         "id": 5,
@@ -41,8 +53,11 @@
         "departmentid": 2,
         "date": "2023-03-14",
         "diagnosis": "Acute Bronchitis",
-        "prescription": "Bronchodilators, Cough Syrup",
-        "treatment": "Bronchitis Medication and Rest"
+        "treatment": "Bronchitis Medication and Rest",
+        "prescriptions": {
+            "Biogesic": 2,
+            "Aspirin": 2
+        }
     },
     {
         "id": 6,
@@ -50,8 +65,11 @@
         "departmentid": 2,
         "date": "2023-03-15",
         "diagnosis": "Migraine Headache",
-        "prescription": "Pain Relievers, Rest in Dark Room",
-        "treatment": "Migraine Management"
+        "treatment": "Migraine Management",
+        "prescriptions": {
+            "Biogesic": 2,
+            "Aspirin": 2
+        }
     },
     {
         "id": 7,
@@ -59,8 +77,11 @@
         "departmentid": 2,
         "date": "2023-03-16",
         "diagnosis": "Gastroenteritis",
-        "prescription": "Fluid Replacement, Antiemetics",
-        "treatment": "Gastroenteritis Treatment"
+        "treatment": "Gastroenteritis Treatment",
+        "prescriptions": {
+            "Biogesic": 2,
+            "Aspirin": 2
+        }
     },
     {
         "id": 8,
@@ -68,8 +89,11 @@
         "departmentid": 2,
         "date": "2023-03-17",
         "diagnosis": "Allergic Rhinitis",
-        "prescription": "Antihistamines, Nasal Spray",
-        "treatment": "Allergy Management"
+        "treatment": "Allergy Management",
+        "prescriptions": {
+            "Biogesic": 2,
+            "Aspirin": 2
+        }
     },
     {
         "id": 9,
@@ -77,8 +101,11 @@
         "departmentid": 4,
         "date": "2023-03-18",
         "diagnosis": "Appendicitis",
-        "prescription": "Surgery, Antibiotics",
-        "treatment": "Appendicitis Treatment"
+        "treatment": "Appendicitis Treatment",
+        "prescriptions": {
+            "Biogesic": 2,
+            "Aspirin": 2
+        }
     },
     {
         "id": 10,
@@ -86,7 +113,10 @@
         "departmentid": 6,
         "date": "2023-03-19",
         "diagnosis": "Common Cold",
-        "prescription": "Rest, Fluids, Over-the-Counter Medication",
-        "treatment": "Cold Symptom Relief"
+        "treatment": "Cold Symptom Relief",
+        "prescriptions": {
+            "Biogesic": 2,
+            "Aspirin": 2
+        }
     }
 ]

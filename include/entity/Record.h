@@ -1,33 +1,30 @@
 #pragma once
 
-#include "json.hpp"
 #include <string>
 #include <vector>
+#include <map>
+#include "json.hpp"
+#include "Entity.h"
 
 using std::string;
 using namespace nlohmann;
 
-class Record
+class Record : public Entity
 {
 private:
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Record, id, patientID, departmentid, date, diagnosis, prescription, treatment);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Record, id, patientID, departmentid, date, diagnosis, prescriptions, treatment);
 
 public:
 
     Record() = default;
-    
-    void print();
-
-    bool operator==(const int& other) const;
 
     std::vector<string> to_row() const;
 
-    
-    int id;
     int patientID;
     int departmentid;
     string date;
     string diagnosis;
-    string prescription;
     string treatment;
+
+    std::map<string, int> prescriptions;
 };

@@ -3,60 +3,80 @@
         "id": 1,
         "lastName": "Smith",
         "firstName": "John",
-        "departmentid": 1
+        "numAppointments": 10,
+        "departmentid": 1,
+        "passkey": "passkey"
     },
     {
         "id": 2,
         "lastName": "Johnson",
         "firstName": "Alice",
-        "departmentid": 2
+        "numAppointments": 2,
+        "departmentid": 1,
+        "passkey": "passkey"
     },
     {
         "id": 3,
         "lastName": "Brown",
         "firstName": "Michael",
-        "departmentid": 3
+        "numAppointments": 1,
+        "departmentid": 1,
+        "passkey": "passkey"
     },
     {
         "id": 4,
         "lastName": "Davis",
         "firstName": "Sarah",
-        "departmentid": 4
+        "numAppointments": 2,
+        "departmentid": 4,
+        "passkey": "passkey"
     },
     {
         "id": 5,
         "lastName": "Wilson",
         "firstName": "David",
-        "departmentid": 5
+        "numAppointments": 2,
+        "departmentid": 5,
+        "passkey": "passkey"
     },
     {
         "id": 6,
         "lastName": "Anderson",
         "firstName": "Linda",
-        "departmentid": 6
+        "numAppointments": 2,
+        "departmentid": 6,
+        "passkey": "passkey"
     },
     {
         "id": 7,
         "lastName": "Martinez",
         "firstName": "James",
-        "departmentid": 7
+        "numAppointments": 2,
+        "departmentid": 7,
+        "passkey": "passkey"
     },
     {
         "id": 8,
         "lastName": "White",
         "firstName": "Emily",
-        "departmentid": 8
+        "numAppointments": 2,
+        "departmentid": 8,
+        "passkey": "passkey"
     },
     {
         "id": 9,
         "lastName": "Harris",
         "firstName": "Robert",
-        "departmentid": 9
+        "numAppointments": 2,
+        "departmentid": 9,
+        "passkey": "passkey"
     },
     {
         "id": 10,
         "lastName": "Thompson",
         "firstName": "Jennifer",
-        "departmentid": 10
+        "numAppointments": 2,
+        "departmentid": 10,
+        "passkey": "passkey"
     }
 ]

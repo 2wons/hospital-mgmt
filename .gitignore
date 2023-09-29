@@ -3,3 +3,4 @@ build/*
 build/compile_commands.json
 cmake-build-debug/
 zdump/
+.vscode/c_cpp_properties.json

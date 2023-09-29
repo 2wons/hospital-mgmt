@@ -39,6 +39,7 @@ public:
 
     void add(T item) 
     { 
+        item.setID(makeId());
         db.push_back(item); 
     }
 
@@ -56,9 +57,9 @@ public:
         return std::find(db.begin(), db.end(), id);
     }
 
-    T remove() 
+    void remove(const int& id) 
     {
-        //implement
+        std::remove(db.begin(), db.end(), id);
     }
 
     std::vector<T> where(std::function<bool(const T)> callback)
@@ -72,6 +73,23 @@ public:
         }
 
         return results;
+    }
+
+    int makeId()
+    {
+        if (db.empty())
+            return 1;
+        
+        int latest = db[db.size()-1].getID();
+
+        while (true)
+        {
+            latest++;
+            if (find(latest) == db.end())
+                break;
+        }
+        return latest;
+
     }
 
 private:

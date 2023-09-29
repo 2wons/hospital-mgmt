@@ -44,11 +44,11 @@ int main()
             break;
         
         case 6:
-            console.test("schedule");
+            console.appointments();
             break;
         
         case 7:
-            console.test("message");
+            console.messages();
             break;
 
         default:
@@ -67,5 +67,5 @@ int main()
 
     } while (choice != 999);
 
-    //console.onExit();
+    console.onExit();
 }

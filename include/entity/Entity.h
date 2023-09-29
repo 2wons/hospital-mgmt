@@ -10,7 +10,10 @@ protected:
     int id;
 
 public:
+
     int getID() const;
+
+    void setID(const int& id);
 
     bool operator==(const int& other) const;
 
