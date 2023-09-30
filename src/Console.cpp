@@ -1,7 +1,7 @@
 #include "Console.h"
 #include "input.hpp"
 #include "ctime"
-
+#include "Date.h"
 /*
 
 1/ retrieve doctors from that department
@@ -440,7 +440,7 @@ void Console::appointments()
    WriteLine("[2] Cancel Appointment            ");
    WriteLine("\n[3] ->Back to Main Menu         ");
 
-   int choice;
+   int choice; cin.ignore();
    getNumber("input choice > ", choice, MinMax(1,3));
 
    Clear();
@@ -483,6 +483,11 @@ void Console::addAppointment()
 
     std::vector<Doctor> doctors = doctorsdb.where(
         [&deptid](const Doctor& d) { return d.departmentid == deptid; });
+
+    if (doctors.empty()) {
+        cout << "No available doctors";
+        return;
+    }
     
     int min = doctors[0].numAppointments;
     Doctor selectedDoctor = doctors[0];
@@ -493,20 +498,35 @@ void Console::addAppointment()
     }
 
     date = getDate(TOMORROW);
+    int hour = 0;
 
     auto doctor = doctorsdb.find(selectedDoctor.getID());
+
+    while (true)
+    {
+        // try to book the appointment at current date
+        hour = doctor->book_appointment(date);
+        if (hour != -1);
+            break;
+        // current date is fully booked, check next day
+        date = Date()
+                .setDate(date)
+                .increment()
+                .getString();
+    }
     
     cout << "---------------------------" << endl;
-
-
     cout << "[New appointment created]" << endl;
-    cout << "Patient: " << patient->fullName() << endl;
-    cout << "Doctor: " << doctor->fullName() << endl;
-    cout << "Date: " << date << endl ;
+
+    cout << "Patient: " << patient->fullName()  << endl;
+    cout << "Doctor: "  << doctor->fullName()   << endl;
+    cout << "Date: "    << date                 << endl ;
+    cout << "Time: "    << Date().getHour(hour) << endl ;
+
     cout << "What is the subject of the appointment? \n -->  ";
     subject = Prompt("Enter appointment subject: ");
 
-    appointmentsdb.add({patientid, doctor->getID(), date, subject});
+    appointmentsdb.add({patientid, doctor->getID(), date, hour, subject});
     doctor->numAppointments += 1;
     
     cout << "\n[Appointment successfully created]" << endl;
@@ -562,4 +582,5 @@ void Console::onExit()
     //recordsdb.save();
     //messagesdb.save();
     appointmentsdb.save();
+    doctorsdb.save();
 }

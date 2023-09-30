@@ -2,12 +2,14 @@
 
 Appointment::Appointment(const int& patientID, 
                          const int& doctorID, 
-                         const std::string date, 
+                         const std::string date,
+                         const int& hour,
                          const std::string subject)
 {
     this->patientID = patientID;
     this->doctorID = doctorID;
     this->date = date;
+    this->hour = hour;
     this->subject = subject;
 }
 
