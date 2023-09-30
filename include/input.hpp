@@ -64,7 +64,7 @@ inline void getNumber(const std::string &prompt, int &var, const MinMax &bounds)
 
         var = stoi(tmp);
 
-        if (var >= bounds.min && var <= bounds.max)
+        if (bounds.max != -1 && var >= bounds.min && var <= bounds.max)
         {
             break;
         }
