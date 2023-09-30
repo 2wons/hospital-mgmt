@@ -19,6 +19,13 @@ public:
 
     std::vector<string> to_row() const;
 
+    void add(const int& quantity);
+
+    void pull(const int& quantity);
+
+    bool canPull() const;
+
+
     string Name;
     int Quantity;
     double Cost;

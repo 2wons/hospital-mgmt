@@ -62,6 +62,8 @@ public:
 
     void viewItems();
 
+    void updateStock();
+
     void medical();
 
     void addRecord();

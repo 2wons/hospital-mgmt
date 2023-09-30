@@ -2,6 +2,7 @@
 #include "input.hpp"
 #include "ctime"
 #include "Date.h"
+
 /*
 
 1/ retrieve doctors from that department
@@ -97,7 +98,7 @@ void Console::inventory()
    WriteLine("----Inventory-----");
    WriteLine("[1] Add new medicine");
    WriteLine("[2] View all");
-   WriteLine("[3] Manage");
+   WriteLine("[3] Update Item Stock");
    WriteLine("\n[4] ->Back to Main Menu");
 
    int choice;
@@ -111,7 +112,7 @@ void Console::inventory()
             break;
         case 2: viewItems();
             break;
-        case 3: test("3");
+        case 3: updateStock();
             break;
         case 4: return;
             break;
@@ -302,6 +303,48 @@ void Console::viewItems()
     prettyTable({"ID", "Name", "Quantity", "Cost"}, inventorydb.all());
 }
 
+void Console::updateStock()
+{
+    int updateChoice;
+    int ItemId, quantity;
+
+    cout << "[Update Stock]\n" << endl;
+
+    if (inventorydb.all().empty()) {
+        cout << "No Items in Inventory";
+        return;
+    }
+
+    getNumber("Enter ItemID to update: ", ItemId, MinMax(1,999));
+    
+    auto item = inventorydb.find(ItemId);
+
+    cout << "Would you like to pull[1] or  add[2] stock\n";
+    cin >> updateChoice;
+
+    if (updateChoice == 1 && !item->canPull()) {
+        cout << "Item is not available";
+        return;
+    }
+
+    string action = "Enter number of items to ";
+    action  += updateChoice == 1 ? "pull: " : "add: ";
+
+    int max = updateChoice == 1 ? item->Quantity : -1;
+    getNumber(action, quantity, MinMax(1, max));
+
+    switch (updateChoice)
+    {
+        case 1: item->pull(quantity); break;
+        case 2: item->add(quantity);  break;
+    }
+
+    cout << "\n[Item succesfully updated]\n";
+    cout << "Item [" + item->Name + "] new quantity: ";
+    cout << to_string(item->Quantity);
+
+}
+
 void Console::findPatient()
 {
     int patientId; cin.ignore();
@@ -440,7 +483,7 @@ void Console::appointments()
    WriteLine("[2] Cancel Appointment            ");
    WriteLine("\n[3] ->Back to Main Menu         ");
 
-   int choice; cin.ignore();
+   int choice; cin.clear(); cin.ignore();
    getNumber("input choice > ", choice, MinMax(1,3));
 
    Clear();
@@ -581,6 +624,6 @@ void Console::onExit()
     //departmentsdb.save();
     //recordsdb.save();
     //messagesdb.save();
-    appointmentsdb.save();
-    doctorsdb.save();
+    //appointmentsdb.save();
+    //doctorsdb.save();
 }
