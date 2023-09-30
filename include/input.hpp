@@ -142,13 +142,13 @@ void prettyTable(vector<string> headers, vector<T> collection, int mode = 0)
     std::cout << table << std::endl;
 }
 
-enum Date
+enum DateRange
 {
     TODAY,
     TOMORROW
 };
 
-std::string getDate(Date date)
+std::string getDate(DateRange date)
 {
     // Get the current time
     std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
