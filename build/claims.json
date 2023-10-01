@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "patientid": 1,
+        "to_insurer": "Medicare",
+        "for_services": [
+            "Heavy iv drip",
+            "Ibuprofen x2"
+        ],
+        "date_last_updated": "2023-10-01",
+        "totalCost": 240.0,
+        "status": "approved"
+    },
+    {
+        "id": 2,
+        "patientid": 1,
+        "to_insurer": "Medicare",
+        "for_services": [
+            "Spinal Surgery",
+            "Amoxicillin x1",
+            "Aspirin x2",
+            "Biogesic x1",
+            "Cetirizine x1",
+            "Ibuprofen x3",
+            "Paracetamol x4",
+            "Ranitidine x1"
+        ],
+        "date_last_updated": "2023-10-01",
+        "totalCost": 1560.0,
+        "status": "denied"
+    }
+]

@@ -20,6 +20,9 @@ public:
 
     std::vector<string> to_row() const;
 
+    std::map<string, int> getPrescriptions();
+    
+
     int patientID;
     int departmentid;
     string date;

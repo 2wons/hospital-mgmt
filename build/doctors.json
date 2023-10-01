@@ -5,7 +5,8 @@
         "firstName": "John",
         "numAppointments": 10,
         "departmentid": 1,
-        "passkey": "passkey"
+        "passkey": "passkey",
+        "schedule": {}
     },
     {
         "id": 2,
@@ -13,70 +14,79 @@
         "firstName": "Alice",
         "numAppointments": 2,
         "departmentid": 1,
-        "passkey": "passkey"
+        "passkey": "passkey",
+        "schedule": {}
     },
     {
         "id": 3,
         "lastName": "Brown",
         "firstName": "Michael",
-        "numAppointments": 1,
-        "departmentid": 1,
-        "passkey": "passkey"
+        "numAppointments": 2,
+        "departmentid": 2,
+        "passkey": "passkey",
+        "schedule": {}
     },
     {
         "id": 4,
         "lastName": "Davis",
         "firstName": "Sarah",
         "numAppointments": 2,
-        "departmentid": 4,
-        "passkey": "passkey"
+        "departmentid": 2,
+        "passkey": "passkey",
+        "schedule": {}
     },
     {
         "id": 5,
         "lastName": "Wilson",
         "firstName": "David",
         "numAppointments": 2,
-        "departmentid": 5,
-        "passkey": "passkey"
+        "departmentid": 3,
+        "passkey": "passkey",
+        "schedule": {}
     },
     {
         "id": 6,
         "lastName": "Anderson",
         "firstName": "Linda",
         "numAppointments": 2,
-        "departmentid": 6,
-        "passkey": "passkey"
+        "departmentid": 3,
+        "passkey": "passkey",
+        "schedule": {}
     },
     {
         "id": 7,
         "lastName": "Martinez",
         "firstName": "James",
         "numAppointments": 2,
-        "departmentid": 7,
-        "passkey": "passkey"
+        "departmentid": 4,
+        "passkey": "passkey",
+        "schedule": {}
     },
     {
         "id": 8,
         "lastName": "White",
         "firstName": "Emily",
         "numAppointments": 2,
-        "departmentid": 8,
-        "passkey": "passkey"
+        "departmentid": 4,
+        "passkey": "passkey",
+        "schedule": {}
     },
     {
         "id": 9,
         "lastName": "Harris",
         "firstName": "Robert",
         "numAppointments": 2,
-        "departmentid": 9,
-        "passkey": "passkey"
+        "departmentid": 5,
+        "passkey": "passkey",
+        "schedule": {}
     },
     {
         "id": 10,
         "lastName": "Thompson",
         "firstName": "Jennifer",
         "numAppointments": 2,
-        "departmentid": 10,
-        "passkey": "passkey"
+        "departmentid": 5,
+        "passkey": "passkey",
+        "schedule": {}
     }
 ]

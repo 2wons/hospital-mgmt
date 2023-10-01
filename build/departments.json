@@ -13,30 +13,10 @@
     },
     {
         "id": 4,
-        "dptname": "Oncology"
+        "dptname": "Emergency Medicine"
     },
     {
         "id": 5,
         "dptname": "Neurology"
-    },
-    {
-        "id": 6,
-        "dptname": "Pediatrics"
-    },
-    {
-        "id": 7,
-        "dptname": "Obstetrics & Gynecology"
-    },
-    {
-        "id": 8,
-        "dptname": "Emergency Medicine"
-    },
-    {
-        "id": 9,
-        "dptname": "Radiology"
-    },
-    {
-        "id": 10,
-        "dptname": "Pathology"
     }
 ]

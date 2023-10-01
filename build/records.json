@@ -1,8 +1,8 @@
 [
     {
         "id": 1,
-        "patientID": 2,
-        "departmentid": 2,
+        "patientID": 1,
+        "departmentid": 1,
         "date": "2023-03-12",
         "diagnosis": "Upper Respiratory Infection",
         "treatment": "Rest and Stay Hydrated",
@@ -13,7 +13,7 @@
     },
     {
         "id": 2,
-        "patientID": 3,
+        "patientID": 2,
         "departmentid": 2,
         "date": "2023-03-12",
         "diagnosis": "Hypertension",
@@ -25,8 +25,8 @@
     },
     {
         "id": 3,
-        "patientID": 2,
-        "departmentid": 2,
+        "patientID": 3,
+        "departmentid": 3,
         "date": "2023-03-12",
         "diagnosis": "Type 2 Diabetes",
         "treatment": "Medication and Diet Management",
@@ -38,7 +38,7 @@
     {
         "id": 4,
         "patientID": 1,
-        "departmentid": 2,
+        "departmentid": 4,
         "date": "2023-03-13",
         "diagnosis": "Fractured Arm",
         "treatment": "Immobilization and Pain Relief",
@@ -49,8 +49,8 @@
     },
     {
         "id": 5,
-        "patientID": 4,
-        "departmentid": 2,
+        "patientID": 2,
+        "departmentid": 5,
         "date": "2023-03-14",
         "diagnosis": "Acute Bronchitis",
         "treatment": "Bronchitis Medication and Rest",
@@ -61,8 +61,8 @@
     },
     {
         "id": 6,
-        "patientID": 5,
-        "departmentid": 2,
+        "patientID": 3,
+        "departmentid": 1,
         "date": "2023-03-15",
         "diagnosis": "Migraine Headache",
         "treatment": "Migraine Management",
@@ -73,7 +73,7 @@
     },
     {
         "id": 7,
-        "patientID": 3,
+        "patientID": 1,
         "departmentid": 2,
         "date": "2023-03-16",
         "diagnosis": "Gastroenteritis",
@@ -85,8 +85,8 @@
     },
     {
         "id": 8,
-        "patientID": 5,
-        "departmentid": 2,
+        "patientID": 2,
+        "departmentid": 3,
         "date": "2023-03-17",
         "diagnosis": "Allergic Rhinitis",
         "treatment": "Allergy Management",
@@ -97,7 +97,7 @@
     },
     {
         "id": 9,
-        "patientID": 1,
+        "patientID": 3,
         "departmentid": 4,
         "date": "2023-03-18",
         "diagnosis": "Appendicitis",
@@ -109,8 +109,8 @@
     },
     {
         "id": 10,
-        "patientID": 4,
-        "departmentid": 6,
+        "patientID": 1,
+        "departmentid": 5,
         "date": "2023-03-19",
         "diagnosis": "Common Cold",
         "treatment": "Cold Symptom Relief",

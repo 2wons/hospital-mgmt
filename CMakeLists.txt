@@ -9,6 +9,7 @@ include_directories(include)
 set(SOURCE_FILES
     src/main.cpp
     src/Console.cpp
+    src/Date.cpp
     src/entity/Entity.cpp
     src/entity/Patient.cpp
     src/entity/Department.cpp
@@ -17,6 +18,7 @@ set(SOURCE_FILES
     src/entity/Item.cpp
     src/entity/Message.cpp
     src/entity/Appointment.cpp
+    src/entity/Claim.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})

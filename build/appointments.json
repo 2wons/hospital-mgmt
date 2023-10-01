@@ -1,16 +1,1 @@
-[
-    {
-        "id": 2,
-        "patientID": 1,
-        "doctorID": 3,
-        "date": "2023-09-30",
-        "subject": "Omg omg"
-    },
-    {
-        "id": 2,
-        "patientID": 1,
-        "doctorID": 3,
-        "date": "",
-        "subject": ""
-    }
-]
+[]

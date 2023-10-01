@@ -13,7 +13,8 @@ public:
 
     Appointment(const int& patientID, 
                 const int& doctorID, 
-                const std::string date, 
+                const std::string date,
+                const int& hour, 
                 const std::string subject);
     
     std::vector<std::string> to_row() const;
@@ -22,8 +23,9 @@ public:
 private:
     int patientID;
     int doctorID;
+    int hour;
     std::string date;
     std::string subject;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Appointment, id, patientID, doctorID, date, subject);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_ORDERED(Appointment, id, patientID, doctorID, date, hour, subject);
 };

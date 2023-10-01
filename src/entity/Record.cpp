@@ -20,3 +20,9 @@ std::vector<string> Record::to_row() const
         treatment 
     };
 }
+
+
+std::map<string, int> Record::getPrescriptions()
+{
+    return prescriptions;
+}

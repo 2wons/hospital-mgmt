@@ -40,7 +40,7 @@ int main()
             break;
         
         case 5:
-            console.test("billing");
+            console.billings();
             break;
         
         case 6:

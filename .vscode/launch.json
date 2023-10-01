@@ -8,8 +8,8 @@
             "name": "Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/main.exe",
-            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/build/Medicare.exe",
+            "cwd": "${workspaceFolder}/build",
             "externalConsole": true,
             "preLaunchTask": "build"
         }

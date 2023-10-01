@@ -1,6 +1,7 @@
 #include "Console.h"
 #include "input.hpp"
 #include "ctime"
+#include "Date.h"
 
 /*
 
@@ -70,7 +71,7 @@ void Console::doctors()
    WriteLine("[1] Add new doctor       ");
    WriteLine("[2] View all             ");
    WriteLine("[3] Search               ");
-   WriteLine("\n[5] ->Back to Main Menu");
+   WriteLine("\n[4] ->Back to Main Menu");
 
    int choice = 0;
    std::cin >> choice;
@@ -97,7 +98,7 @@ void Console::inventory()
    WriteLine("----Inventory-----");
    WriteLine("[1] Add new medicine");
    WriteLine("[2] View all");
-   WriteLine("[3] Manage");
+   WriteLine("[3] Update Item Stock");
    WriteLine("\n[4] ->Back to Main Menu");
 
    int choice;
@@ -111,7 +112,7 @@ void Console::inventory()
             break;
         case 2: viewItems();
             break;
-        case 3: test("3");
+        case 3: updateStock();
             break;
         case 4: return;
             break;
@@ -145,22 +146,55 @@ void Console::addPatient()
 {
     WriteLine("[Adding New Patient]\n");
     cin.ignore();
+    string insurer = "";
 
     Patient patient;
     patient.lastName = Prompt("Enter last name: ");
     patient.firstName = Prompt("Enter first name: ");
 
     int month, day, year;
+    int heartrate, painlevel;
+    float temp;
 
     getNumber("Enter a month of birth (number)", month,   MinMax(1,12));
     getNumber("Enter a day of birth   (number)",   day,   MinMax(1, 31));
     getNumber("Enter a year of birth  (number)",  year,   MinMax(1700, 2099));
 
     patient.dob = formatDate(month, day, year);
-;
+
     patient.address = Prompt("Enter address: ");
+    getNumber("Enter heartrate: ", heartrate, MinMax(1,-1));
+    getNumber("Enter painlevel: ", painlevel, MinMax(1,-1));
+    cout << "Enter temp: "; cin >> temp;
+
+    insurer = Prompt("Enter insurace company (leave blank if none): ");
+
+    patient.setInsurer(insurer);
 
     patientsdb.add(patient);
+}
+
+void Console::updatePatient()
+{
+    int patientId; cin.ignore();
+    getNumber("Enter patient id: (number): ", patientId, MinMax(1,999));
+    auto it = patientsdb.find(patientId);
+
+    if (it == patientsdb.all().end()) {
+        WriteLine("Patient does not exist");
+        return;
+    }
+
+    int heartrate, painlevel;
+    float temp;
+
+    getNumber("Enter heartrate: ", heartrate, MinMax(1,-1));
+    getNumber("Enter painlevel: ", painlevel, MinMax(1,-1));
+    cout << "Enter temp: "; cin >> temp;
+    it->setVitals(heartrate, painlevel, temp);
+
+    cout << "\n[Vitals updates]" << endl;
+
 }
 
 void Console::addDoctor()
@@ -169,9 +203,11 @@ void Console::addDoctor()
     cin.ignore();
 
     Doctor doctor;
+    string passkey;
 
     doctor.lastName  = Prompt("Enter last name: ");
     doctor.firstName = Prompt("Enter first name: ");
+    passkey = Prompt("Set Doctor Passkey: ");
 
     WriteLine("Available departments: ");
     for (auto& department : departmentsdb.all())
@@ -188,6 +224,11 @@ void Console::addRecord()
     WriteLine("[Adding New Patient Medical Record]\n");
     Record record;
     cin.ignore();
+
+    if (patientsdb.all().empty()) {
+        cout << "Unavailable";
+        return;
+    }
     
     getNumber("Enter patient id: ",    record.patientID,    patientsdb.all());
 
@@ -197,7 +238,7 @@ void Console::addRecord()
 
     getNumber("Enter department id: ", record.departmentid, departmentsdb.all());
 
-    record.date         = Prompt("Enter date: ");
+    record.date         = Date().getDate(TODAY);
     record.diagnosis    = Prompt("Enter diagnosis: ");
 
     prettyTable({"id", "name", "quantity", "cost"}, inventorydb.all());
@@ -223,11 +264,18 @@ void Console::addRecord()
         WriteLine("-------------------------");
     }
     WriteLine("-------------------------");
-    //@TODO make proper function for this
-    // maybe cost shouldn't be added if the patient has insurance
-    patient->balance += totalCost;
-
+  
     record.treatment = Prompt("Enter Treatments: ");
+
+    if (patient->hasInsurer())
+    {
+        Claim claim(record, totalCost, patient->getInsurer());
+        claimsdb.add(claim);
+    }
+    else
+    {
+        patient->balance += totalCost;
+    }
     recordsdb.add(record);
 }
 
@@ -239,8 +287,8 @@ void Console::addItem()
     Item item;
     item.Name = Prompt("Enter Medicine name: ");
 
-    getNumber("Enter medicine Quantiy:", item.Quantity, MinMax(1, 999));
-    getNumber("Enter medicine Cost:", item.Quantity, MinMax(1, 999));
+    getNumber("Enter medicine Quantiy:", item.Quantity, MinMax(1, -1));
+    getNumber("Enter medicine Cost:", item.Quantity, MinMax(1, -1));
 
 	inventorydb.add(item);
     WriteLine("Medicine Item successfully added.");
@@ -253,6 +301,10 @@ void Console::viewDepartmentRecords()
     int deptid;
     cin.ignore();
 
+    if (departmentsdb.all().empty()) {
+        cout << "No departments";
+        return;
+    }
     getNumber("Enter department id: (number): ", deptid, departmentsdb.all());
     std::vector<Record> results = recordsdb.where(
         [&deptid](const Record& r) { return r.departmentid == deptid; });
@@ -302,6 +354,48 @@ void Console::viewItems()
     prettyTable({"ID", "Name", "Quantity", "Cost"}, inventorydb.all());
 }
 
+void Console::updateStock()
+{
+    int updateChoice;
+    int ItemId, quantity;
+
+    cout << "[Update Stock]\n" << endl;
+
+    if (inventorydb.all().empty()) {
+        cout << "No Items in Inventory";
+        return;
+    }
+
+    getNumber("Enter ItemID to update: ", ItemId, MinMax(1,999));
+    
+    auto item = inventorydb.find(ItemId);
+
+    cout << "Would you like to pull[1] or  add[2] stock\n";
+    cin >> updateChoice;
+
+    if (updateChoice == 1 && !item->canPull()) {
+        cout << "Item is not available";
+        return;
+    }
+
+    string action = "Enter number of items to ";
+    action  += updateChoice == 1 ? "pull: " : "add: ";
+
+    int max = updateChoice == 1 ? item->Quantity : -1;
+    getNumber(action, quantity, MinMax(1, max));
+
+    switch (updateChoice)
+    {
+        case 1: item->pull(quantity); break;
+        case 2: item->add(quantity);  break;
+    }
+
+    cout << "\n[Item succesfully updated]\n";
+    cout << "Item [" + item->Name + "] new quantity: ";
+    cout << to_string(item->Quantity);
+
+}
+
 void Console::findPatient()
 {
     int patientId; cin.ignore();
@@ -315,11 +409,22 @@ void Console::findPatient()
     const auto records = recordsdb.where(
         [&patientId](const Record& r) {return r.patientID == patientId;});
 
+    const auto claims = claimsdb.where(
+        [&patientId](const Claim& c) { return c.getPatientId() == patientId;});
+
     cout << "Patient ID    : " << it->getID()   << endl;
     cout << "Last Name     : " << it->lastName  << endl;
     cout << "First Name    : " << it->firstName << endl;
     cout << "Date of Birth : " << it->dob       << endl;
+    cout << "Balance($)    : " << it->balance   << endl;
     cout << "Address       : " << it->address   << endl << endl;
+    cout << "Vitals--------------------------------" << endl;
+    cout << "heart rate    : " << it->heartrate   << endl;
+    cout << "pain level    : " << it->painlevel   << endl;
+    cout << "temp          : " << it->temp       << endl;
+
+
+    cout << "\n[Medical History]\n";
 
     prettyTable({
         "id", 
@@ -331,6 +436,18 @@ void Console::findPatient()
         "treatments"},
         records);
 
+    cout << "\n[Insurance Claims]\n";
+    
+    prettyTable({
+        "id",
+        "patientid", 
+        "to_insurer", 
+        "for_services", 
+        "date_last_updated",
+        "totalCost",
+        "status"
+    }, claims);
+
 }
 
 void Console::messages()
@@ -341,7 +458,7 @@ void Console::messages()
    WriteLine("[3] View my inbox                 ");
    WriteLine("\n[4] ->Back to Main Menu         ");
 
-   int choice;
+   int choice; cin.clear(); cin.ignore();
    getNumber("input choice > ", choice, MinMax(1,4));
 
    Clear();
@@ -440,7 +557,7 @@ void Console::appointments()
    WriteLine("[2] Cancel Appointment            ");
    WriteLine("\n[3] ->Back to Main Menu         ");
 
-   int choice;
+   int choice; cin.clear(); cin.ignore();
    getNumber("input choice > ", choice, MinMax(1,3));
 
    Clear();
@@ -483,6 +600,11 @@ void Console::addAppointment()
 
     std::vector<Doctor> doctors = doctorsdb.where(
         [&deptid](const Doctor& d) { return d.departmentid == deptid; });
+
+    if (doctors.empty()) {
+        cout << "No available doctors";
+        return;
+    }
     
     int min = doctors[0].numAppointments;
     Doctor selectedDoctor = doctors[0];
@@ -492,21 +614,36 @@ void Console::addAppointment()
             selectedDoctor = doc;
     }
 
-    date = getDate(TOMORROW);
+    date = Date().getDate(TOMORROW);
+    int hour = 0;
 
     auto doctor = doctorsdb.find(selectedDoctor.getID());
+
+    while (true)
+    {
+        // try to book the appointment at current date
+        hour = doctor->book_appointment(date);
+        if (hour != -1);
+            break;
+        // current date is fully booked, check next day
+        date = Date()
+                .setDate(date)
+                .increment()
+                .getString();
+    }
     
     cout << "---------------------------" << endl;
-
-
     cout << "[New appointment created]" << endl;
-    cout << "Patient: " << patient->fullName() << endl;
-    cout << "Doctor: " << doctor->fullName() << endl;
-    cout << "Date: " << date << endl ;
+
+    cout << "Patient: " << patient->fullName()  << endl;
+    cout << "Doctor: "  << doctor->fullName()   << endl;
+    cout << "Date: "    << date                 << endl ;
+    cout << "Time: "    << Date().getHour(hour) << endl ;
+
     cout << "What is the subject of the appointment? \n -->  ";
     subject = Prompt("Enter appointment subject: ");
 
-    appointmentsdb.add({patientid, doctor->getID(), date, subject});
+    appointmentsdb.add({patientid, doctor->getID(), date, hour, subject});
     doctor->numAppointments += 1;
     
     cout << "\n[Appointment successfully created]" << endl;
@@ -529,6 +666,71 @@ void Console::cancelAppointment()
 
     cout << "\n[Appointment successfully cancelled]" << endl;
 
+}
+
+void Console::billings()
+{
+    WriteLine("--------Billings---------");
+    WriteLine("[1] Manage Claim         ");
+    WriteLine("\n[2] ->Back to Main Menu");
+    WriteLine("-------------------------");
+
+    int choice;
+    getNumber("input choice > ", choice, MinMax(1,2));
+
+    Clear();
+    
+    switch (choice)
+    {
+        case 1 : manageClaim(); break;
+        case 2: return;
+    }
+}
+
+void Console::manageClaim()
+{
+    cout << "[Manage Claim]\n" << endl;
+
+    if (claimsdb.all().empty()) {
+        cout << "No claims available";
+        return;
+    }
+
+    int claimId, option;
+    getNumber("Enter claim id: ", claimId, MinMax(1,-1));
+
+    auto claim = claimsdb.find(claimId);
+    if (claim == claimsdb.all().end()) {
+        cout << "Claim not found";
+        return;
+    }
+
+    auto patient = patientsdb.find(claim->getPatientId());
+
+    Table table = claim->toTable();
+    cout << table << endl << endl;
+
+    cout << "What would you like to do?\n";
+    cout << "[1] nothing [2] Approve [3] Deny\n\n";
+
+    getNumber("Enter option: ", option, MinMax(1,3));
+    string msg;
+
+    switch (option)
+    {
+        case 1: msg = "\nNothing to do"; break;
+
+        case 2: claim->approve(); 
+                msg = "\nClaim Approved";
+                break;
+
+        case 3: claim->deny();
+                patient->owe(claim->getCost());
+                msg = "\nClaim Denied";
+                break;
+    }
+
+    cout << msg << endl;
 }
 
 void Console::WriteLine(const string& prompt, int spaces)
@@ -558,8 +760,11 @@ void Console::Clear()
 void Console::onExit()
 {
     //patientsdb.save();
+    //inventorydb.save();
     //departmentsdb.save();
     //recordsdb.save();
     //messagesdb.save();
-    appointmentsdb.save();
+    //appointmentsdb.save();
+    //doctorsdb.save();
+    //claimsdb.save();
 }

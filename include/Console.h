@@ -14,6 +14,7 @@
 #include "entity/Item.h"
 #include "entity/Message.h"
 #include "entity/Appointment.h"
+#include "entity/Claim.h"
 
 using namespace std;
 
@@ -30,7 +31,8 @@ public:
         doctorsdb("doctors.json"), 
         inventorydb("inventory.json"),
         messagesdb("messages.json"),
-        appointmentsdb("appointments.json")
+        appointmentsdb("appointments.json"),
+        claimsdb("claims.json")
     {
 
     }
@@ -50,6 +52,8 @@ public:
 
     void findPatient();
 
+    void updatePatient();
+
     void doctors();
 
     void addDoctor();
@@ -61,6 +65,8 @@ public:
     void addItem();
 
     void viewItems();
+
+    void updateStock();
 
     void medical();
 
@@ -79,6 +85,10 @@ public:
     void addAppointment();
 
     void cancelAppointment();
+
+    void billings();
+
+    void manageClaim();
 
     void viewInbox();
 
@@ -104,4 +114,5 @@ private:
     Db<Item>            inventorydb;
     Db<Message>         messagesdb;
     Db<Appointment>     appointmentsdb;
+    Db<Claim>           claimsdb;
 };
