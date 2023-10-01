@@ -71,7 +71,7 @@ void Console::doctors()
    WriteLine("[1] Add new doctor       ");
    WriteLine("[2] View all             ");
    WriteLine("[3] Search               ");
-   WriteLine("\n[5] ->Back to Main Menu");
+   WriteLine("\n[4] ->Back to Main Menu");
 
    int choice = 0;
    std::cin >> choice;
@@ -146,6 +146,7 @@ void Console::addPatient()
 {
     WriteLine("[Adding New Patient]\n");
     cin.ignore();
+    string insurer = "";
 
     Patient patient;
     patient.lastName = Prompt("Enter last name: ");
@@ -158,8 +159,12 @@ void Console::addPatient()
     getNumber("Enter a year of birth  (number)",  year,   MinMax(1700, 2099));
 
     patient.dob = formatDate(month, day, year);
-;
+
     patient.address = Prompt("Enter address: ");
+
+    insurer = Prompt("Enter insurace company (leave blank if none): ");
+
+    patient.setInsurer(insurer);
 
     patientsdb.add(patient);
 }
@@ -198,7 +203,7 @@ void Console::addRecord()
 
     getNumber("Enter department id: ", record.departmentid, departmentsdb.all());
 
-    record.date         = Prompt("Enter date: ");
+    record.date         = Date().getDate(TODAY);
     record.diagnosis    = Prompt("Enter diagnosis: ");
 
     prettyTable({"id", "name", "quantity", "cost"}, inventorydb.all());
@@ -224,11 +229,18 @@ void Console::addRecord()
         WriteLine("-------------------------");
     }
     WriteLine("-------------------------");
-    //@TODO make proper function for this
-    // maybe cost shouldn't be added if the patient has insurance
-    patient->balance += totalCost;
-
+  
     record.treatment = Prompt("Enter Treatments: ");
+
+    if (patient->hasInsurer())
+    {
+        Claim claim(record, totalCost, patient->getInsurer());
+        claimsdb.add(claim);
+    }
+    else
+    {
+        patient->balance += totalCost;
+    }
     recordsdb.add(record);
 }
 
@@ -240,8 +252,8 @@ void Console::addItem()
     Item item;
     item.Name = Prompt("Enter Medicine name: ");
 
-    getNumber("Enter medicine Quantiy:", item.Quantity, MinMax(1, 999));
-    getNumber("Enter medicine Cost:", item.Quantity, MinMax(1, 999));
+    getNumber("Enter medicine Quantiy:", item.Quantity, MinMax(1, -1));
+    getNumber("Enter medicine Cost:", item.Quantity, MinMax(1, -1));
 
 	inventorydb.add(item);
     WriteLine("Medicine Item successfully added.");
@@ -358,11 +370,17 @@ void Console::findPatient()
     const auto records = recordsdb.where(
         [&patientId](const Record& r) {return r.patientID == patientId;});
 
+    const auto claims = claimsdb.where(
+        [&patientId](const Claim& c) { return c.getPatientId() == patientId;});
+
     cout << "Patient ID    : " << it->getID()   << endl;
     cout << "Last Name     : " << it->lastName  << endl;
     cout << "First Name    : " << it->firstName << endl;
     cout << "Date of Birth : " << it->dob       << endl;
+    cout << "Balance($)    : " << it->balance   << endl;
     cout << "Address       : " << it->address   << endl << endl;
+
+    cout << "\n[Medical History]\n";
 
     prettyTable({
         "id", 
@@ -374,6 +392,18 @@ void Console::findPatient()
         "treatments"},
         records);
 
+    cout << "\n[Insurance Claims]\n";
+    
+    prettyTable({
+        "id",
+        "patientid", 
+        "to_insurer", 
+        "for_services", 
+        "date_last_updated",
+        "totalCost",
+        "status"
+    }, claims);
+
 }
 
 void Console::messages()
@@ -384,7 +414,7 @@ void Console::messages()
    WriteLine("[3] View my inbox                 ");
    WriteLine("\n[4] ->Back to Main Menu         ");
 
-   int choice;
+   int choice; cin.clear(); cin.ignore();
    getNumber("input choice > ", choice, MinMax(1,4));
 
    Clear();
@@ -540,7 +570,7 @@ void Console::addAppointment()
             selectedDoctor = doc;
     }
 
-    date = getDate(TOMORROW);
+    date = Date().getDate(TOMORROW);
     int hour = 0;
 
     auto doctor = doctorsdb.find(selectedDoctor.getID());
@@ -594,6 +624,71 @@ void Console::cancelAppointment()
 
 }
 
+void Console::billings()
+{
+    WriteLine("--------Billings---------");
+    WriteLine("[1] Manage Claim         ");
+    WriteLine("\n[2] ->Back to Main Menu");
+    WriteLine("-------------------------");
+
+    int choice;
+    getNumber("input choice > ", choice, MinMax(1,2));
+
+    Clear();
+    
+    switch (choice)
+    {
+        case 1 : manageClaim(); break;
+        case 2: return;
+    }
+}
+
+void Console::manageClaim()
+{
+    cout << "[Manage Claim]\n" << endl;
+
+    if (claimsdb.all().empty()) {
+        cout << "No claims available";
+        return;
+    }
+
+    int claimId, option;
+    getNumber("Enter claim id: ", claimId, MinMax(1,-1));
+
+    auto claim = claimsdb.find(claimId);
+    if (claim == claimsdb.all().end()) {
+        cout << "Claim not found";
+        return;
+    }
+
+    auto patient = patientsdb.find(claim->getPatientId());
+
+    Table table = claim->toTable();
+    cout << table << endl << endl;
+
+    cout << "What would you like to do?\n";
+    cout << "[1] nothing [2] Approve [3] Deny\n\n";
+
+    getNumber("Enter option: ", option, MinMax(1,3));
+    string msg;
+
+    switch (option)
+    {
+        case 1: msg = "\nNothing to do"; break;
+
+        case 2: claim->approve(); 
+                msg = "\nClaim Approved";
+                break;
+
+        case 3: claim->deny();
+                patient->owe(claim->getCost());
+                msg = "\nClaim Denied";
+                break;
+    }
+
+    cout << msg << endl;
+}
+
 void Console::WriteLine(const string& prompt, int spaces)
 {
     cout << std::string(spaces, ' ') << prompt << "\n";
@@ -621,9 +716,11 @@ void Console::Clear()
 void Console::onExit()
 {
     //patientsdb.save();
+    //inventorydb.save();
     //departmentsdb.save();
     //recordsdb.save();
     //messagesdb.save();
     //appointmentsdb.save();
     //doctorsdb.save();
+    claimsdb.save();
 }

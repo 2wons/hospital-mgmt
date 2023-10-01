@@ -12,3 +12,23 @@ string Patient::fullName() const
 {
     return lastName + ", " + firstName;
 }
+
+string Patient::getInsurer() const
+{
+    return insurer;
+}
+
+void Patient::setInsurer(string insurer)
+{
+    this->insurer = insurer;
+}
+
+bool Patient::hasInsurer() const
+{
+    return !insurer.empty();
+}
+
+void Patient::owe(double cost)
+{
+    balance += cost;
+}

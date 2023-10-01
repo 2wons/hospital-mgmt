@@ -61,7 +61,10 @@
         "valarray": "cpp",
         "variant": "cpp",
         "regex": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "charconv": "cpp",
+        "chrono": "cpp",
+        "format": "cpp"
     },
     "cmake.configureOnOpen": false,
     "cmake.generator": "Ninja"

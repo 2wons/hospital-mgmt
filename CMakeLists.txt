@@ -18,6 +18,7 @@ set(SOURCE_FILES
     src/entity/Item.cpp
     src/entity/Message.cpp
     src/entity/Appointment.cpp
+    src/entity/Claim.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
