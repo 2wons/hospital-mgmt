@@ -2,11 +2,18 @@
 
 #include <map>
 #include <string>
+#include <chrono>
+#include <ctime>
 
 using std::map;
 using std::string;
 using std::to_string;
 
+enum DateRange
+{
+    TODAY,
+    TOMORROW
+};
 
 class Date 
 {
@@ -30,6 +37,8 @@ public:
     string getString();
 
     string getHour(const int hour);
+
+    string getDate(DateRange date);
 
     Date setDate(const std::string& date);
 

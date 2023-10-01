@@ -66,3 +66,27 @@ string Date::getHour(const int hour)
     return {to_string(new_hour)+ampm};
 
 }
+
+string Date::getDate(DateRange date)
+{
+     // Get the current time
+    std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
+
+    // Add one day if tomorrow is true
+    if (date == TOMORROW)
+    {
+        currentTime += std::chrono::hours(24);
+    }
+
+    // Convert the time_point to a time_t for formatting
+    std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
+
+    // Convert to a struct tm for formatting
+    std::tm *currentTime_tm = std::localtime(&currentTime_t);
+
+    // Format the date
+    char buffer[80];
+    std::strftime(buffer, sizeof(buffer), "%Y-%m-%d", currentTime_tm);
+
+    return buffer;
+}
