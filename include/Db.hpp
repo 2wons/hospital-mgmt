@@ -5,6 +5,8 @@
 #include <string>
 #include <functional>
 #include <fstream>
+#include <thread>
+#include <chrono>
 
 #include "json.hpp"
 
@@ -19,7 +21,30 @@ public:
 
     Db(std::string jsondb) : file(jsondb) 
     { 
-        load();
+        try
+        {
+            load();
+        } 
+        catch (const json::exception& e)
+        {
+            std::cerr << e.what() << "\n"
+                      << "in-> " 
+                      << file << "\n";
+
+            std::this_thread::sleep_for(
+                std::chrono::seconds(5));
+            exit(1);
+        }
+        catch (const std::exception& e)
+        {
+            std::cerr << e.what() << "\n"
+                      << "in-> " 
+                      << file << "\n";
+
+            std::this_thread::sleep_for(
+                std::chrono::seconds(5));
+            exit(1);
+        }
     }
 
     void load()
