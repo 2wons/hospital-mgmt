@@ -153,6 +153,8 @@ void Console::addPatient()
     patient.firstName = Prompt("Enter first name: ");
 
     int month, day, year;
+    int heartrate, painlevel;
+    float temp;
 
     getNumber("Enter a month of birth (number)", month,   MinMax(1,12));
     getNumber("Enter a day of birth   (number)",   day,   MinMax(1, 31));
@@ -161,6 +163,9 @@ void Console::addPatient()
     patient.dob = formatDate(month, day, year);
 
     patient.address = Prompt("Enter address: ");
+    getNumber("Enter heartrate: ", heartrate, MinMax(1,-1));
+    getNumber("Enter painlevel: ", painlevel, MinMax(1,-1));
+    cout << "Enter temp: "; cin >> temp;
 
     insurer = Prompt("Enter insurace company (leave blank if none): ");
 
@@ -169,15 +174,40 @@ void Console::addPatient()
     patientsdb.add(patient);
 }
 
+void Console::updatePatient()
+{
+    int patientId; cin.ignore();
+    getNumber("Enter patient id: (number): ", patientId, MinMax(1,999));
+    auto it = patientsdb.find(patientId);
+
+    if (it == patientsdb.all().end()) {
+        WriteLine("Patient does not exist");
+        return;
+    }
+
+    int heartrate, painlevel;
+    float temp;
+
+    getNumber("Enter heartrate: ", heartrate, MinMax(1,-1));
+    getNumber("Enter painlevel: ", painlevel, MinMax(1,-1));
+    cout << "Enter temp: "; cin >> temp;
+    it->setVitals(heartrate, painlevel, temp);
+
+    cout << "\n[Vitals updates]" << endl;
+
+}
+
 void Console::addDoctor()
 {
     WriteLine("[Adding New Doctor]\n");
     cin.ignore();
 
     Doctor doctor;
+    string passkey;
 
     doctor.lastName  = Prompt("Enter last name: ");
     doctor.firstName = Prompt("Enter first name: ");
+    passkey = Prompt("Set Doctor Passkey: ");
 
     WriteLine("Available departments: ");
     for (auto& department : departmentsdb.all())
@@ -194,6 +224,11 @@ void Console::addRecord()
     WriteLine("[Adding New Patient Medical Record]\n");
     Record record;
     cin.ignore();
+
+    if (patientsdb.all().empty()) {
+        cout << "Unavailable";
+        return;
+    }
     
     getNumber("Enter patient id: ",    record.patientID,    patientsdb.all());
 
@@ -266,6 +301,10 @@ void Console::viewDepartmentRecords()
     int deptid;
     cin.ignore();
 
+    if (departmentsdb.all().empty()) {
+        cout << "No departments";
+        return;
+    }
     getNumber("Enter department id: (number): ", deptid, departmentsdb.all());
     std::vector<Record> results = recordsdb.where(
         [&deptid](const Record& r) { return r.departmentid == deptid; });
@@ -379,6 +418,11 @@ void Console::findPatient()
     cout << "Date of Birth : " << it->dob       << endl;
     cout << "Balance($)    : " << it->balance   << endl;
     cout << "Address       : " << it->address   << endl << endl;
+    cout << "Vitals--------------------------------" << endl;
+    cout << "heart rate    : " << it->heartrate   << endl;
+    cout << "pain level    : " << it->painlevel   << endl;
+    cout << "temp          : " << it->temp       << endl;
+
 
     cout << "\n[Medical History]\n";
 
@@ -722,5 +766,5 @@ void Console::onExit()
     //messagesdb.save();
     //appointmentsdb.save();
     //doctorsdb.save();
-    claimsdb.save();
+    //claimsdb.save();
 }

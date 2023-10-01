@@ -32,3 +32,10 @@ void Patient::owe(double cost)
 {
     balance += cost;
 }
+
+void Patient::setVitals(int heartrate, int painlevel, float temp)
+{
+    this->heartrate = heartrate;
+    this->painlevel = painlevel;
+    this->temp = temp;
+}

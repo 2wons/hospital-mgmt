@@ -52,6 +52,8 @@ public:
 
     void findPatient();
 
+    void updatePatient();
+
     void doctors();
 
     void addDoctor();
