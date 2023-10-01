@@ -22,47 +22,16 @@
         "lastName": "Brown",
         "firstName": "Michael",
         "numAppointments": 2,
-        "departmentid": 3,
+        "departmentid": 2,
         "passkey": "passkey",
-        "schedule": {
-            "2023-10-02": [
-                [
-                    13,
-                    "BOOKED"
-                ],
-                [
-                    14,
-                    "AVAILABLE"
-                ],
-                [
-                    15,
-                    "AVAILABLE"
-                ],
-                [
-                    16,
-                    "AVAILABLE"
-                ],
-                [
-                    17,
-                    "AVAILABLE"
-                ],
-                [
-                    18,
-                    "AVAILABLE"
-                ],
-                [
-                    19,
-                    "AVAILABLE"
-                ]
-            ]
-        }
+        "schedule": {}
     },
     {
         "id": 4,
         "lastName": "Davis",
         "firstName": "Sarah",
         "numAppointments": 2,
-        "departmentid": 4,
+        "departmentid": 2,
         "passkey": "passkey",
         "schedule": {}
     },
@@ -71,7 +40,7 @@
         "lastName": "Wilson",
         "firstName": "David",
         "numAppointments": 2,
-        "departmentid": 5,
+        "departmentid": 3,
         "passkey": "passkey",
         "schedule": {}
     },
@@ -80,7 +49,7 @@
         "lastName": "Anderson",
         "firstName": "Linda",
         "numAppointments": 2,
-        "departmentid": 6,
+        "departmentid": 3,
         "passkey": "passkey",
         "schedule": {}
     },
@@ -89,7 +58,7 @@
         "lastName": "Martinez",
         "firstName": "James",
         "numAppointments": 2,
-        "departmentid": 7,
+        "departmentid": 4,
         "passkey": "passkey",
         "schedule": {}
     },
@@ -98,7 +67,7 @@
         "lastName": "White",
         "firstName": "Emily",
         "numAppointments": 2,
-        "departmentid": 8,
+        "departmentid": 4,
         "passkey": "passkey",
         "schedule": {}
     },
@@ -107,7 +76,7 @@
         "lastName": "Harris",
         "firstName": "Robert",
         "numAppointments": 2,
-        "departmentid": 9,
+        "departmentid": 5,
         "passkey": "passkey",
         "schedule": {}
     },
@@ -116,7 +85,7 @@
         "lastName": "Thompson",
         "firstName": "Jennifer",
         "numAppointments": 2,
-        "departmentid": 10,
+        "departmentid": 5,
         "passkey": "passkey",
         "schedule": {}
     }
