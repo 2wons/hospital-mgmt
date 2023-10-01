@@ -3,8 +3,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <chrono>
-#include <ctime>
 
 #include "tabulate.hpp"
 
@@ -39,7 +37,7 @@ bool isNumber(std::string str)
     }
 }
 
-std::string Prompt(std::string prompt)
+std::string Prompt(std::string prompt, bool canEmpty = false)
 {
     std::string input;
     std::cout << prompt << ": ";
@@ -63,6 +61,8 @@ inline void getNumber(const std::string &prompt, int &var, const MinMax &bounds)
         }
 
         var = stoi(tmp);
+
+        if (bounds.max == -1 && var >= 1) break;
 
         if (bounds.max != -1 && var >= bounds.min && var <= bounds.max)
         {
@@ -99,7 +99,7 @@ inline void getNumber(const std::string &prompt, int &var, std::vector<T> myList
         if (it != myList.end())
             break;
 
-        cout << "Please enter a valid id" << endl;
+        std::cout << "Please enter a valid id" << std::endl;
         cin.clear();
     }
 }
@@ -140,34 +140,4 @@ void prettyTable(vector<string> headers, vector<T> collection, int mode = 0)
         table.column(headers.size() - 1).format().width(40);
 
     std::cout << table << std::endl;
-}
-
-enum DateRange
-{
-    TODAY,
-    TOMORROW
-};
-
-std::string getDate(DateRange date)
-{
-    // Get the current time
-    std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
-
-    // Add one day if tomorrow is true
-    if (date == TOMORROW)
-    {
-        currentTime += std::chrono::hours(24);
-    }
-
-    // Convert the time_point to a time_t for formatting
-    std::time_t currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
-
-    // Convert to a struct tm for formatting
-    std::tm *currentTime_tm = std::localtime(&currentTime_t);
-
-    // Format the date
-    char buffer[80];
-    std::strftime(buffer, sizeof(buffer), "%Y-%m-%d", currentTime_tm);
-
-    return buffer;
 }
