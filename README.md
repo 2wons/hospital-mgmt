@@ -18,7 +18,8 @@ Provide instructions on how to set up and run your project.
 
 ### Prerequisites
 
-List any prerequisites here. For example, you may need to have CMake and a C++ compiler installed.
+- C++ compiler (C++17)
+- CMake (Minimum version 3.26)
 
 ### Building
 
@@ -30,6 +31,7 @@ cd build
 cmake ..
 make
 ```
+Note: move json files to build folder
 This assumes that you are in the project's root directory.
 
 ## Usage
