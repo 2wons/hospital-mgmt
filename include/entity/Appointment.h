@@ -19,6 +19,11 @@ public:
     
     std::vector<std::string> to_row() const;
 
+    std::vector<std::string> row_headers() const;
+
+    int getDocID() const;
+
+    int getPatientID() const;
 
 private:
     int patientID;
