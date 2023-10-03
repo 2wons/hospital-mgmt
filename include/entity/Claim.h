@@ -48,6 +48,8 @@ public:
 
     std::vector<string> to_row() const;
 
+    std::vector<string> row_headers() const;
+
     Table toTable() const;
 
     std::string service_str() const;

@@ -39,6 +39,8 @@ public:
 
     string fullName() const;
 
+    int getDeptID() const;
+
     string  lastName;
     string  firstName;
     int     departmentid;

@@ -6,7 +6,10 @@
         "dob": "1990-01-15",
         "address": "123 Main St",
         "insurer": "Medicare",
-        "balance": 475
+        "heartrate": 90,
+        "painlevel": 10,
+        "temp": 42.0,
+        "balance": 1200.0
     },
     {
         "id": 2,
@@ -15,7 +18,10 @@
         "dob": "1985-03-22",
         "address": "456 Elm St",
         "insurer": "Medicare",
-        "balance": 500
+        "heartrate": 60,
+        "painlevel": 4,
+        "temp": 36.5,
+        "balance": 500.0
     },
     {
         "id": 3,
@@ -24,6 +30,45 @@
         "dob": "1978-07-10",
         "address": "789 Oak St",
         "insurer": "",
-        "balance": 500
+        "heartrate": 60,
+        "painlevel": 4,
+        "temp": 36.5,
+        "balance": 800.0
+    },
+    {
+        "id": 4,
+        "lastName": "Murphy",
+        "firstName": "Shawn",
+        "dob": "1-2-1996",
+        "address": "1212 New york alabang ",
+        "insurer": "Optum co.",
+        "heartrate": 60,
+        "painlevel": 6,
+        "temp": 34.5,
+        "balance": 0.0
+    },
+    {
+        "id": 5,
+        "lastName": "Nicocado",
+        "firstName": "Avocado",
+        "dob": "2-7-1995",
+        "address": "2057 Nuestra senora",
+        "insurer": "Medicupe",
+        "heartrate": 90,
+        "painlevel": 10,
+        "temp": 42.0,
+        "balance": 0.0
+    },
+    {
+        "id": 6,
+        "lastName": "OS",
+        "firstName": "Glad",
+        "dob": "1-2-2007",
+        "address": "123 Black Bulls",
+        "insurer": "Aperture Inc.",
+        "heartrate": 10,
+        "painlevel": 1,
+        "temp": 12.0,
+        "balance": 0.0
     }
 ]

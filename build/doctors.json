@@ -75,10 +75,41 @@
         "id": 9,
         "lastName": "Harris",
         "firstName": "Robert",
-        "numAppointments": 2,
+        "numAppointments": 3,
         "departmentid": 5,
         "passkey": "passkey",
-        "schedule": {}
+        "schedule": {
+            "2023-10-04": [
+                [
+                    13,
+                    "BOOKED"
+                ],
+                [
+                    14,
+                    "AVAILABLE"
+                ],
+                [
+                    15,
+                    "AVAILABLE"
+                ],
+                [
+                    16,
+                    "AVAILABLE"
+                ],
+                [
+                    17,
+                    "AVAILABLE"
+                ],
+                [
+                    18,
+                    "AVAILABLE"
+                ],
+                [
+                    19,
+                    "AVAILABLE"
+                ]
+            ]
+        }
     },
     {
         "id": 10,
@@ -87,6 +118,15 @@
         "numAppointments": 2,
         "departmentid": 5,
         "passkey": "passkey",
+        "schedule": {}
+    },
+    {
+        "id": 11,
+        "lastName": "Cuban",
+        "firstName": "Mark",
+        "numAppointments": 0,
+        "departmentid": 2,
+        "passkey": "",
         "schedule": {}
     }
 ]
