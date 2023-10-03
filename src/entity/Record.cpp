@@ -26,3 +26,15 @@ std::map<string, int> Record::getPrescriptions()
 {
     return prescriptions;
 }
+
+std::vector<string> Record::row_headers() const
+{
+    return {"id", 
+    "patient_id", 
+    "department_id", 
+    "date", 
+    "diagnosis", 
+    "prescrptions", 
+    "treatments"
+    };
+}
