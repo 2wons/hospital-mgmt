@@ -3,13 +3,6 @@
 #include "ctime"
 #include "Date.h"
 
-/*
-
-1/ retrieve doctors from that department
-2/ find doctor with least amnt of appointments
-
- */
-
 void Console::test(std::string text) 
 { 
     std::cout << text << " in development" << std::endl;
@@ -84,9 +77,9 @@ void Console::doctors()
             break;
         case 2: viewDoctors();
             break;
-        case 3: test("3");
+        case 3: viewDoctor();
             break;
-        case 4: test("4");
+        case 4: return;
             break;
 
         default: WriteLine("invalid");
@@ -102,6 +95,7 @@ void Console::inventory()
    WriteLine("\n[4] ->Back to Main Menu");
 
    int choice;
+   cin.ignore();
    getNumber("input choice > ", choice, MinMax(1,4));
 
    Clear();
@@ -126,10 +120,10 @@ void Console::medical()
    WriteLine("----Medical Records-----");
    WriteLine("[1] Add new record");
    WriteLine("[2] View by department");
-   WriteLine("\n[5] ->Back to Main Menu");
+   WriteLine("\n[3] ->Back to Main Menu");
 
    int choice = 0;
-   cin >> choice; 
+   getNumber("Enter choice: ", choice, MinMax(1,3));
 
    Clear();
 
@@ -139,6 +133,7 @@ void Console::medical()
             break;
         case 2: viewDepartmentRecords(); 
             break;
+        case 3: return;
    }
 }
 
@@ -167,6 +162,7 @@ void Console::addPatient()
     getNumber("Enter painlevel: ", painlevel, MinMax(1,-1));
     cout << "Enter temp: "; cin >> temp;
 
+    cin.ignore();
     insurer = Prompt("Enter insurace company (leave blank if none): ");
 
     patient.setInsurer(insurer);
@@ -199,6 +195,8 @@ void Console::updatePatient()
 
 void Console::addDoctor()
 {
+    if (!isAdmin()) return;
+
     WriteLine("[Adding New Doctor]\n");
     cin.ignore();
 
@@ -281,6 +279,8 @@ void Console::addRecord()
 
 void Console::addItem()
 {
+    if (!isAdmin()) return;
+
     WriteLine("[Adding New Medicine Item]\n");
     cin.ignore();
 
@@ -327,6 +327,7 @@ void Console::viewDepartmentRecords()
 
 void Console::viewPatients()
 {
+    if (!isAdmin()) return;
     WriteLine("Viewing patients");
 
     prettyTable({"id",
@@ -340,6 +341,7 @@ void Console::viewPatients()
 
 void Console::viewDoctors()
 {
+    if (!isAdmin()) return;
     WriteLine("[Viewing doctors]\n");
     prettyTable({"id",
                  "lastname",
@@ -350,6 +352,8 @@ void Console::viewDoctors()
 
 void Console::viewItems()
 {
+    if (!isAdmin()) return;
+
     WriteLine("[Viewing Medicine Items]\n");
     prettyTable({"ID", "Name", "Quantity", "Cost"}, inventorydb.all());
 }
@@ -411,43 +415,40 @@ void Console::findPatient()
 
     const auto claims = claimsdb.where(
         [&patientId](const Claim& c) { return c.getPatientId() == patientId;});
-
-    cout << "Patient ID    : " << it->getID()   << endl;
-    cout << "Last Name     : " << it->lastName  << endl;
-    cout << "First Name    : " << it->firstName << endl;
-    cout << "Date of Birth : " << it->dob       << endl;
-    cout << "Balance($)    : " << it->balance   << endl;
-    cout << "Address       : " << it->address   << endl << endl;
-    cout << "Vitals--------------------------------" << endl;
-    cout << "heart rate    : " << it->heartrate   << endl;
-    cout << "pain level    : " << it->painlevel   << endl;
-    cout << "temp          : " << it->temp       << endl;
-
-
-    cout << "\n[Medical History]\n";
-
-    prettyTable({
-        "id", 
-        "patientid", 
-        "departmentid", 
-        "date",
-        "diagnosis",
-        "prescriptions",
-        "treatments"},
-        records);
-
-    cout << "\n[Insurance Claims]\n";
     
-    prettyTable({
-        "id",
-        "patientid", 
-        "to_insurer", 
-        "for_services", 
-        "date_last_updated",
-        "totalCost",
-        "status"
-    }, claims);
+    const auto appointments = appointmentsdb.where(
+        [&patientId](const Appointment& a) { return a.getPatientID() == patientId;});
 
+    Table table, info, records_t, vitals, claims_t, appointments_t;
+    Table info_vitals;
+    info.add_row({"Patient ID: ", to_string(it->getID())});
+    info.add_row({"Last Name: ", it->lastName});
+    info.add_row({"First Name: ", it->firstName});
+    info.add_row({"Date of Birth: ", it->dob});
+    info.add_row({"Balance: ", to_string(it->balance)});
+    info.add_row({"Address: ", it->address});
+
+    vitals.add_row({"Heartrate", to_string(it->heartrate)});
+    vitals.add_row({"Pain level", to_string(it->painlevel)});
+    vitals.add_row({"temperature", to_string(it->temp)});
+
+    info_vitals.add_row({"Info", "Vitals"});
+    info_vitals.add_row({info, vitals});
+
+    records_t = makeTable(Record().row_headers(), records);
+    claims_t = makeTable(Claim().row_headers(), claims);
+    appointments_t = makeTable(Appointment().row_headers(), appointments);
+
+    table.add_row({"Personal Info"});
+    table.add_row({info_vitals});
+    table.add_row({"Records"});
+    table.add_row({records_t});
+    table.add_row({"Appointments"});
+    table.add_row({appointments_t});
+    table.add_row({"Claims"});
+    table.add_row({claims_t});
+
+    cout << table << endl;
 }
 
 void Console::messages()
@@ -542,6 +543,8 @@ void Console::viewInbox()
 
 void Console::viewAllMessages()
 {
+    if (!isAdmin()) return;
+
     prettyTable({
         "id",
         "sender_id",
@@ -733,15 +736,46 @@ void Console::manageClaim()
     cout << msg << endl;
 }
 
+void Console::viewDoctor()
+{
+    int doctorid; cin.ignore();
+    getNumber("Enter doctor id: (number): ", doctorid, MinMax(1,-1));
+    auto it = doctorsdb.find(doctorid);
+
+    if (doctorsdb.all().empty() || it == doctorsdb.all().end()) {
+        WriteLine("Patient does not exist");
+        return;
+    }
+
+    Table table, info;
+    table.format().font_align(FontAlign::center);
+    table.add_row({"Viewing Doctor"});
+    
+    info.add_row({"full Name", it->fullName()});
+    info.add_row({"Department id", to_string(it->getDeptID())});
+    table.add_row({info});
+
+    cout << table << endl;
+}
+
 void Console::WriteLine(const string& prompt, int spaces)
 {
     cout << std::string(spaces, ' ') << prompt << "\n";
 }
 
-void Console::pause()
+bool Console::isAdmin()
 {
-    //cin.ignore();
-    cin.get();
+    cin.ignore();
+    cout << "[This function requires admin access]" << endl;
+    string key = Prompt("Enter passkey: ");
+
+    if (!(key == "zxasqw12"))
+    {
+        cout << "\n[Invalid passkey. ]" << endl;
+        return false;
+    }
+    Clear();
+    return true;
 }
 
 void Console::Clear()

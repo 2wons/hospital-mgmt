@@ -92,9 +92,11 @@ public:
 
     void viewInbox();
 
+    void viewDoctor();
+
     void onExit();
 
-    void pause();
+    bool isAdmin();
 
     /** Write string to console
      *  @param prompt string to display
