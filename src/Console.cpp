@@ -367,6 +367,7 @@ void Console::updateStock()
         return;
     }
 
+    cin.ignore();
     getNumber("Enter ItemID to update: ", ItemId, MinMax(1,999));
     
     auto item = inventorydb.find(ItemId);
