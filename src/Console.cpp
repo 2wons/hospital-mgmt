@@ -32,12 +32,9 @@ void Console::patients()
     WriteLine("[4] update               ");
     WriteLine("\n[5] ->Back to Main Menu");
     WriteLine("-------------------------");
-    WriteLine("input choice > ");
 
-    // @TODO clear menu after choice
-
-    int choice = 0;
-    std::cin >> choice;
+    int choice = 0; cin.ignore();
+    getNumber("Enter Choice: ", choice, MinMax(1,-1));
 
     Clear();
 
@@ -49,9 +46,9 @@ void Console::patients()
             break;
         case 3: findPatient();
             break;
-        case 4: test("4");
+        case 4: updatePatient();
             break;
-        case 5: WriteLine("exit");
+        case 5: return;
             break;
 
         default: WriteLine("invalid");
@@ -172,7 +169,7 @@ void Console::addPatient()
 
 void Console::updatePatient()
 {
-    int patientId; cin.ignore();
+    int patientId;
     getNumber("Enter patient id: (number): ", patientId, MinMax(1,999));
     auto it = patientsdb.find(patientId);
 
@@ -189,7 +186,7 @@ void Console::updatePatient()
     cout << "Enter temp: "; cin >> temp;
     it->setVitals(heartrate, painlevel, temp);
 
-    cout << "\n[Vitals updates]" << endl;
+    cout << "\n[Vitals updated]" << endl;
 
 }
 
