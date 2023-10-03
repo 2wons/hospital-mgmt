@@ -47,3 +47,8 @@ bool Doctor::hasDate(string date)
     }
     return (schedule.find(date) != schedule.end());
 }
+
+int Doctor::getDeptID() const
+{
+    return departmentid;
+}
