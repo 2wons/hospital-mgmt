@@ -6,6 +6,9 @@
         "dob": "1990-01-15",
         "address": "123 Main St",
         "insurer": "Medicare",
+        "heartrate": 60,
+        "painlevel": 4,
+        "temp": 36.5,
         "balance": 475
     },
     {
@@ -15,6 +18,9 @@
         "dob": "1985-03-22",
         "address": "456 Elm St",
         "insurer": "Medicare",
+        "heartrate": 60,
+        "painlevel": 4,
+        "temp": 36.5,
         "balance": 500
     },
     {
@@ -24,6 +30,9 @@
         "dob": "1978-07-10",
         "address": "789 Oak St",
         "insurer": "",
+        "heartrate": 60,
+        "painlevel": 4,
+        "temp": 36.5,
         "balance": 500
     }
 ]
