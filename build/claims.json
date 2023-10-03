@@ -28,5 +28,17 @@
         "date_last_updated": "2023-10-01",
         "totalCost": 1560.0,
         "status": "denied"
+    },
+    {
+        "id": 3,
+        "patientid": 4,
+        "to_insurer": "Optum co.",
+        "for_services": [
+            "Brain Surgery",
+            "Cetirizine x2"
+        ],
+        "date_last_updated": "2023-10-03",
+        "totalCost": 160.0,
+        "status": "pending"
     }
 ]

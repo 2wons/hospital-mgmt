@@ -27,6 +27,12 @@
         "id": 5,
         "senderID": 1,
         "receiverID": 2,
-        "body": "I fuckin love you"
+        "body": "I love you more"
+    },
+    {
+        "id": 6,
+        "senderID": 2,
+        "receiverID": 3,
+        "body": "You are good at surgery."
     }
 ]

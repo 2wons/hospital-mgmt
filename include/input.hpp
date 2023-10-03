@@ -24,11 +24,15 @@ struct MinMax
     int max;
 };
 
-bool isNumber(std::string str)
+bool isNumber(std::string str, int mode=0)
 {
     try
     {
-        std::stoi(str);
+        if (mode > 0) {
+            std::stod(str);
+        } else {
+            std::stoi(str);
+        }
         return true;
     }
     catch (const std::exception &e)
@@ -77,6 +81,38 @@ inline void getNumber(const std::string &prompt, int &var, const MinMax &bounds)
     }
 }
 
+inline void getNumber(const std::string &prompt, double &var, const MinMax &bounds)
+{
+    string tmp;
+
+    while (true)
+    {
+        cout << prompt << ": ";
+        getline(cin, tmp);
+
+        if (!isNumber(tmp, 1))
+        {
+            std::cout << "inValid number: " << tmp << std::endl;
+            continue;
+        }
+
+        var = stod(tmp);
+
+        if (bounds.max == -1 && var >= 1) break;
+
+        if (bounds.max != -1 && var >= bounds.min && var <= bounds.max)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Please enter a valid number ("
+                 << bounds.min << "-"
+                 << bounds.max << ")\n\n";
+        }
+    }
+}
+
 template <typename T>
 inline void getNumber(const std::string &prompt, int &var, std::vector<T> myList)
 {
@@ -103,6 +139,8 @@ inline void getNumber(const std::string &prompt, int &var, std::vector<T> myList
         cin.clear();
     }
 }
+
+
 
 std::string formatDate(int month, int day, int year)
 {

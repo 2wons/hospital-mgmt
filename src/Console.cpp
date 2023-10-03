@@ -158,6 +158,7 @@ void Console::addPatient()
     getNumber("Enter heartrate: ", heartrate, MinMax(1,-1));
     getNumber("Enter painlevel: ", painlevel, MinMax(1,-1));
     cout << "Enter temp: "; cin >> temp;
+    patient.setVitals(heartrate, painlevel, temp);
 
     cin.ignore();
     insurer = Prompt("Enter insurace company (leave blank if none): ");
@@ -187,7 +188,6 @@ void Console::updatePatient()
     it->setVitals(heartrate, painlevel, temp);
 
     cout << "\n[Vitals updated]" << endl;
-
 }
 
 void Console::addDoctor()
@@ -285,7 +285,7 @@ void Console::addItem()
     item.Name = Prompt("Enter Medicine name: ");
 
     getNumber("Enter medicine Quantiy:", item.Quantity, MinMax(1, -1));
-    getNumber("Enter medicine Cost:", item.Quantity, MinMax(1, -1));
+    
 
 	inventorydb.add(item);
     WriteLine("Medicine Item successfully added.");
@@ -372,8 +372,14 @@ void Console::updateStock()
     
     auto item = inventorydb.find(ItemId);
 
-    cout << "Would you like to pull[1] or  add[2] stock\n";
-    cin >> updateChoice;
+    if (item == inventorydb.all().end())
+    {
+        cout << "Item does not exist.";
+        return;
+    }
+
+    getNumber("Would you like to pull[1] or  add[2] stock: ", 
+              updateChoice, MinMax(1,2) );
 
     if (updateChoice == 1 && !item->canPull()) {
         cout << "Item is not available";
@@ -394,7 +400,7 @@ void Console::updateStock()
 
     cout << "\n[Item succesfully updated]\n";
     cout << "Item [" + item->Name + "] new quantity: ";
-    cout << to_string(item->Quantity);
+    cout << to_string(item->Quantity) << endl;
 
 }
 
@@ -553,7 +559,7 @@ void Console::viewAllMessages()
 
 void Console::appointments()
 {
-   WriteLine("----Messages[Doctor to Doctor]-----");
+   WriteLine("----------Appointments------------");
    WriteLine("[1] Make Appointment              ");
    WriteLine("[2] Cancel Appointment            ");
    WriteLine("\n[3] ->Back to Main Menu         ");
@@ -624,7 +630,7 @@ void Console::addAppointment()
     {
         // try to book the appointment at current date
         hour = doctor->book_appointment(date);
-        if (hour != -1);
+        if (hour != -1)
             break;
         // current date is fully booked, check next day
         date = Date()
@@ -793,12 +799,12 @@ void Console::Clear()
 
 void Console::onExit()
 {
-    //patientsdb.save();
-    //inventorydb.save();
-    //departmentsdb.save();
-    //recordsdb.save();
-    //messagesdb.save();
-    //appointmentsdb.save();
-    //doctorsdb.save();
-    //claimsdb.save();
+    patientsdb.save();
+    inventorydb.save();
+    departmentsdb.save();
+    recordsdb.save();
+    messagesdb.save();
+    appointmentsdb.save();
+    doctorsdb.save();
+    claimsdb.save();
 }
