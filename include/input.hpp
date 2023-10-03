@@ -141,3 +141,29 @@ void prettyTable(vector<string> headers, vector<T> collection, int mode = 0)
 
     std::cout << table << std::endl;
 }
+
+template <class T>
+Table makeTable(vector<string> headers, vector<T> collection)
+{
+    Table table;
+    table.format().locale("C");
+
+    table.add_row(Row_t(headers.begin(), headers.end()));
+    for (const auto &v : collection)
+    {
+        vector<string> row = v.to_row();
+
+        table.add_row(Row_t(row.begin(), row.end()));
+    }
+
+    // center-align and color header cells
+    for (size_t i = 0; i < headers.size(); ++i)
+    {
+        table[0][i].format()
+            .font_color(Color::yellow)
+            .font_align(FontAlign::center)
+            .font_style({FontStyle::bold});
+    }
+
+    return table;
+}
