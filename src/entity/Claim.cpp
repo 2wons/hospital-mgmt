@@ -103,6 +103,19 @@ std::vector<string> Claim::to_row() const
     };
 }
 
+std::vector<string> Claim::row_headers() const
+{
+    return {
+        "id",
+        "patient_id",
+        "to_insurer",
+        "for_services",
+        "date_last_updated",
+        "totalCost",
+        "status"
+    };
+}
+
 std::string Claim::service_str() const
 {
     string service_s;
