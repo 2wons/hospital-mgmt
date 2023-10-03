@@ -166,6 +166,7 @@ void Console::addPatient()
     patient.setInsurer(insurer);
 
     patientsdb.add(patient);
+    patientsdb.save();
 }
 
 void Console::updatePatient()
@@ -188,6 +189,7 @@ void Console::updatePatient()
     it->setVitals(heartrate, painlevel, temp);
 
     cout << "\n[Vitals updated]" << endl;
+    patientsdb.save();
 }
 
 void Console::addDoctor()
@@ -212,6 +214,7 @@ void Console::addDoctor()
 
     doctorsdb.add(doctor);
     WriteLine("\n[Doctor successfully added].");
+    doctorsdb.save();
 }
 
 void Console::addRecord()
@@ -272,6 +275,10 @@ void Console::addRecord()
         patient->balance += totalCost;
     }
     recordsdb.add(record);
+
+    recordsdb.save();
+    inventorydb.save();
+    patientsdb.save();
 }
 
 void Console::addItem()
@@ -289,6 +296,7 @@ void Console::addItem()
 
 	inventorydb.add(item);
     WriteLine("Medicine Item successfully added.");
+    inventorydb.save();
 }
 
 void Console::viewDepartmentRecords()
@@ -401,6 +409,7 @@ void Console::updateStock()
     cout << "\n[Item succesfully updated]\n";
     cout << "Item [" + item->Name + "] new quantity: ";
     cout << to_string(item->Quantity) << endl;
+    inventorydb.save();
 
 }
 
@@ -506,7 +515,7 @@ void Console::addMessage()
 
     messagesdb.add({sender, receiver, body});
     cout << "[Message Successfully added]" << endl;
-
+    messagesdb.save();
 }
 
 void Console::viewInbox()
@@ -655,6 +664,9 @@ void Console::addAppointment()
     
     cout << "\n[Appointment successfully created]" << endl;
 
+    appointmentsdb.save();
+    doctorsdb.save();
+
 }
 
 void Console::cancelAppointment()
@@ -672,7 +684,7 @@ void Console::cancelAppointment()
     appointmentsdb.remove(appt_id);
 
     cout << "\n[Appointment successfully cancelled]" << endl;
-
+    appointmentsdb.save();
 }
 
 void Console::billings()
@@ -731,11 +743,14 @@ void Console::manageClaim()
 
         case 2: claim->approve(); 
                 msg = "\nClaim Approved";
+                claimsdb.save();
                 break;
 
         case 3: claim->deny();
                 patient->owe(claim->getCost());
                 msg = "\nClaim Denied";
+                claimsdb.save();
+                patientsdb.save();
                 break;
     }
 

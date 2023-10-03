@@ -58,5 +58,17 @@
         "painlevel": 10,
         "temp": 42.0,
         "balance": 0.0
+    },
+    {
+        "id": 6,
+        "lastName": "OS",
+        "firstName": "Glad",
+        "dob": "1-2-2007",
+        "address": "123 Black Bulls",
+        "insurer": "Aperture Inc.",
+        "heartrate": 10,
+        "painlevel": 1,
+        "temp": 12.0,
+        "balance": 0.0
     }
 ]
