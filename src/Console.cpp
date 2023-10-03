@@ -689,6 +689,8 @@ void Console::billings()
 
 void Console::manageClaim()
 {
+    if (!isAdmin()) return;
+
     cout << "[Manage Claim]\n" << endl;
 
     if (claimsdb.all().empty()) {
