@@ -328,12 +328,20 @@ void Console::viewDepartmentRecords()
         "prescriptions",
         "treatments"},
         results);
+    
+    
 }
 
 void Console::viewPatients()
 {
-    if (!isAdmin()) return;
+    //if (!isAdmin()) return;
     WriteLine("Viewing patients");
+
+    WriteLine("[Boolinq test, has insurance, orderby balance]");
+    auto results = patientsdb.query()
+                        .where( [](const Patient& patient) {return patient.hasInsurer() == true;} )
+                        .orderBy( [](const Patient& patient) { return patient.balance;} )
+                        .toStdVector();
 
     prettyTable({"id",
                  "lastname",
@@ -341,7 +349,7 @@ void Console::viewPatients()
                  "dob",
                  "address",
                  "balance"},
-                patientsdb.all());
+                results);
 }
 
 void Console::viewDoctors()

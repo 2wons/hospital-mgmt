@@ -9,6 +9,7 @@
 #include <chrono>
 
 #include "json.hpp"
+#include "boolinq.h"
 
 using namespace nlohmann;
 
@@ -66,6 +67,11 @@ public:
     { 
         item.setID(makeId());
         db.push_back(item); 
+    }
+
+    auto query()
+    {
+        return boolinq::from(db);
     }
 
     /**
